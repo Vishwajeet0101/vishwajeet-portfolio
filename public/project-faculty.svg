@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <!-- Faculty Achievement Portal — minimal product illustration in site palette -->
+  <rect width="1280" height="720" fill="#17140f"/>
+  <rect x="1" y="1" width="1278" height="718" fill="none" stroke="#efe9e2" stroke-opacity="0.08"/>
+
+  <!-- top bar -->
+  <line x1="0" y1="64" x2="1280" y2="64" stroke="#efe9e2" stroke-opacity="0.12"/>
+  <rect x="40" y="26" width="26" height="14" fill="#e8a24b"/>
+  <rect x="80" y="29" width="150" height="9" rx="2" fill="#efe9e2" opacity="0.55"/>
+  <rect x="820" y="29" width="46" height="8" rx="2" fill="#efe9e2" opacity="0.3"/>
+  <rect x="886" y="29" width="60" height="8" rx="2" fill="#efe9e2" opacity="0.3"/>
+  <rect x="966" y="29" width="54" height="8" rx="2" fill="#efe9e2" opacity="0.3"/>
+  <rect x="1160" y="22" width="80" height="22" fill="#e8a24b"/>
+  <rect x="1172" y="31" width="56" height="5" rx="2" fill="#17140f"/>
+
+  <!-- sidebar -->
+  <line x1="240" y1="64" x2="240" y2="720" stroke="#efe9e2" stroke-opacity="0.1"/>
+  <rect x="40" y="110" width="120" height="9" rx="2" fill="#e8a24b" opacity="0.9"/>
+  <rect x="40" y="152" width="150" height="8" rx="2" fill="#efe9e2" opacity="0.32"/>
+  <rect x="40" y="190" width="130" height="8" rx="2" fill="#efe9e2" opacity="0.22"/>
+  <rect x="40" y="228" width="140" height="8" rx="2" fill="#efe9e2" opacity="0.22"/>
+  <rect x="40" y="266" width="110" height="8" rx="2" fill="#efe9e2" opacity="0.22"/>
+  <rect x="40" y="304" width="128" height="8" rx="2" fill="#efe9e2" opacity="0.22"/>
+
+  <!-- heading -->
+  <rect x="288" y="112" width="330" height="20" rx="3" fill="#efe9e2" opacity="0.85"/>
+  <rect x="288" y="148" width="210" height="9" rx="2" fill="#efe9e2" opacity="0.35"/>
+
+  <!-- stat blocks -->
+  <g>
+    <rect x="288" y="190" width="200" height="92" fill="none" stroke="#efe9e2" stroke-opacity="0.14"/>
+    <rect x="312" y="214" width="70" height="26" fill="#e8a24b" opacity="0.95"/>
+    <rect x="312" y="254" width="120" height="7" rx="2" fill="#efe9e2" opacity="0.3"/>
+    <rect x="512" y="190" width="200" height="92" fill="none" stroke="#efe9e2" stroke-opacity="0.14"/>
+    <rect x="536" y="214" width="96" height="26" fill="#e8a24b" opacity="0.95"/>
+    <rect x="536" y="254" width="130" height="7" rx="2" fill="#efe9e2" opacity="0.3"/>
+    <rect x="736" y="190" width="200" height="92" fill="none" stroke="#efe9e2" stroke-opacity="0.14"/>
+    <rect x="760" y="214" width="58" height="26" fill="#e8a24b" opacity="0.95"/>
+    <rect x="760" y="254" width="112" height="7" rx="2" fill="#efe9e2" opacity="0.3"/>
+  </g>
+
+  <!-- table header -->
+  <line x1="288" y1="330" x2="1200" y2="330" stroke="#efe9e2" stroke-opacity="0.16"/>
+  <rect x="288" y="346" width="90" height="7" rx="2" fill="#efe9e2" opacity="0.35"/>
+  <rect x="560" y="346" width="70" height="7" rx="2" fill="#efe9e2" opacity="0.35"/>
+  <rect x="760" y="346" width="84" height="7" rx="2" fill="#efe9e2" opacity="0.35"/>
+  <rect x="1020" y="346" width="60" height="7" rx="2" fill="#efe9e2" opacity="0.35"/>
+  <line x1="288" y1="376" x2="1200" y2="376" stroke="#efe9e2" stroke-opacity="0.1"/>
+
+  <!-- achievement rows -->
+  <g>
+    <rect x="288" y="398" width="240" height="9" rx="2" fill="#efe9e2" opacity="0.62"/>
+    <rect x="560" y="398" width="90" height="9" rx="2" fill="#efe9e2" opacity="0.28"/>
+    <rect x="760" y="396" width="76" height="14" fill="none" stroke="#e8a24b"/>
+    <rect x="772" y="400" width="52" height="6" rx="2" fill="#e8a24b" opacity="0.85"/>
+    <line x1="288" y1="436" x2="1200" y2="436" stroke="#efe9e2" stroke-opacity="0.08"/>
+
+    <rect x="288" y="458" width="210" height="9" rx="2" fill="#efe9e2" opacity="0.62"/>
+    <rect x="560" y="458" width="104" height="9" rx="2" fill="#efe9e2" opacity="0.28"/>
+    <rect x="760" y="456" width="76" height="14" fill="#e8a24b" opacity="0.2"/>
+    <rect x="772" y="460" width="52" height="6" rx="2" fill="#e8a24b" opacity="0.85"/>
+    <line x1="288" y1="496" x2="1200" y2="496" stroke="#efe9e2" stroke-opacity="0.08"/>
+
+    <rect x="288" y="518" width="256" height="9" rx="2" fill="#efe9e2" opacity="0.62"/>
+    <rect x="560" y="518" width="78" height="9" rx="2" fill="#efe9e2" opacity="0.28"/>
+    <rect x="760" y="516" width="76" height="14" fill="none" stroke="#efe9e2" stroke-opacity="0.3"/>
+    <rect x="772" y="520" width="52" height="6" rx="2" fill="#efe9e2" opacity="0.4"/>
+    <line x1="288" y1="556" x2="1200" y2="556" stroke="#efe9e2" stroke-opacity="0.08"/>
+
+    <rect x="288" y="578" width="196" height="9" rx="2" fill="#efe9e2" opacity="0.62"/>
+    <rect x="560" y="578" width="96" height="9" rx="2" fill="#efe9e2" opacity="0.28"/>
+    <rect x="760" y="576" width="76" height="14" fill="none" stroke="#e8a24b"/>
+    <rect x="772" y="580" width="52" height="6" rx="2" fill="#e8a24b" opacity="0.85"/>
+    <line x1="288" y1="616" x2="1200" y2="616" stroke="#efe9e2" stroke-opacity="0.08"/>
+
+    <rect x="288" y="638" width="228" height="9" rx="2" fill="#efe9e2" opacity="0.62"/>
+    <rect x="560" y="638" width="86" height="9" rx="2" fill="#efe9e2" opacity="0.28"/>
+    <rect x="760" y="636" width="76" height="14" fill="none" stroke="#efe9e2" stroke-opacity="0.3"/>
+    <rect x="772" y="640" width="52" height="6" rx="2" fill="#efe9e2" opacity="0.4"/>
+  </g>
+
+  <!-- verification panel -->
+  <rect x="1236" y="396" width="4" height="240" fill="#e8a24b" opacity="0.5"/>
+</svg>

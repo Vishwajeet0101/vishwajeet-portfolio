@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <!-- Speedo CRM — minimal product illustration in site palette -->
+  <rect width="1280" height="720" fill="#17140f"/>
+  <rect x="1" y="1" width="1278" height="718" fill="none" stroke="#efe9e2" stroke-opacity="0.08"/>
+
+  <!-- top bar -->
+  <line x1="0" y1="64" x2="1280" y2="64" stroke="#efe9e2" stroke-opacity="0.12"/>
+  <rect x="40" y="26" width="26" height="14" fill="#e8a24b"/>
+  <rect x="80" y="29" width="120" height="9" rx="2" fill="#efe9e2" opacity="0.55"/>
+  <rect x="780" y="29" width="52" height="8" rx="2" fill="#efe9e2" opacity="0.3"/>
+  <rect x="852" y="29" width="66" height="8" rx="2" fill="#efe9e2" opacity="0.3"/>
+  <rect x="938" y="29" width="58" height="8" rx="2" fill="#efe9e2" opacity="0.3"/>
+  <rect x="1160" y="22" width="80" height="22" fill="#e8a24b"/>
+  <rect x="1172" y="31" width="56" height="5" rx="2" fill="#17140f"/>
+
+  <!-- caller header -->
+  <rect x="40" y="112" width="250" height="18" rx="3" fill="#efe9e2" opacity="0.85"/>
+  <rect x="40" y="146" width="170" height="8" rx="2" fill="#efe9e2" opacity="0.32"/>
+  <rect x="1104" y="104" width="96" height="30" fill="none" stroke="#e8a24b"/>
+  <rect x="1118" y="115" width="68" height="7" rx="2" fill="#e8a24b" opacity="0.9"/>
+
+  <!-- queue list -->
+  <g>
+    <rect x="40" y="196" width="400" height="64" fill="#e8a24b" opacity="0.14"/>
+    <circle cx="72" cy="228" r="14" fill="none" stroke="#e8a24b" stroke-opacity="0.9" stroke-width="2"/>
+    <rect x="104" y="212" width="140" height="9" rx="2" fill="#efe9e2" opacity="0.75"/>
+    <rect x="104" y="234" width="96" height="7" rx="2" fill="#efe9e2" opacity="0.3"/>
+    <rect x="360" y="220" width="56" height="16" fill="#e8a24b"/>
+    <rect x="370" y="225" width="36" height="6" rx="2" fill="#17140f"/>
+
+    <rect x="40" y="270" width="400" height="64" fill="none" stroke="#efe9e2" stroke-opacity="0.12"/>
+    <circle cx="72" cy="302" r="14" fill="none" stroke="#efe9e2" stroke-opacity="0.3" stroke-width="2"/>
+    <rect x="104" y="286" width="128" height="9" rx="2" fill="#efe9e2" opacity="0.6"/>
+    <rect x="104" y="308" width="88" height="7" rx="2" fill="#efe9e2" opacity="0.26"/>
+    <rect x="360" y="294" width="56" height="16" fill="none" stroke="#efe9e2" stroke-opacity="0.3"/>
+    <rect x="370" y="299" width="36" height="6" rx="2" fill="#efe9e2" opacity="0.35"/>
+
+    <rect x="40" y="344" width="400" height="64" fill="none" stroke="#efe9e2" stroke-opacity="0.12"/>
+    <circle cx="72" cy="376" r="14" fill="none" stroke="#efe9e2" stroke-opacity="0.3" stroke-width="2"/>
+    <rect x="104" y="360" width="150" height="9" rx="2" fill="#efe9e2" opacity="0.6"/>
+    <rect x="104" y="382" width="110" height="7" rx="2" fill="#efe9e2" opacity="0.26"/>
+    <rect x="360" y="368" width="56" height="16" fill="none" stroke="#efe9e2" stroke-opacity="0.3"/>
+    <rect x="370" y="373" width="36" height="6" rx="2" fill="#efe9e2" opacity="0.35"/>
+
+    <rect x="40" y="418" width="400" height="64" fill="none" stroke="#efe9e2" stroke-opacity="0.12"/>
+    <circle cx="72" cy="450" r="14" fill="none" stroke="#efe9e2" stroke-opacity="0.3" stroke-width="2"/>
+    <rect x="104" y="434" width="118" height="9" rx="2" fill="#efe9e2" opacity="0.6"/>
+    <rect x="104" y="456" width="92" height="7" rx="2" fill="#efe9e2" opacity="0.26"/>
+    <rect x="360" y="442" width="56" height="16" fill="none" stroke="#efe9e2" stroke-opacity="0.3"/>
+    <rect x="370" y="447" width="36" height="6" rx="2" fill="#efe9e2" opacity="0.35"/>
+
+    <rect x="40" y="492" width="400" height="64" fill="none" stroke="#efe9e2" stroke-opacity="0.12"/>
+    <circle cx="72" cy="524" r="14" fill="none" stroke="#efe9e2" stroke-opacity="0.3" stroke-width="2"/>
+    <rect x="104" y="508" width="134" height="9" rx="2" fill="#efe9e2" opacity="0.6"/>
+    <rect x="104" y="530" width="80" height="7" rx="2" fill="#efe9e2" opacity="0.26"/>
+    <rect x="360" y="516" width="56" height="16" fill="none" stroke="#efe9e2" stroke-opacity="0.3"/>
+    <rect x="370" y="521" width="36" height="6" rx="2" fill="#efe9e2" opacity="0.35"/>
+  </g>
+
+  <!-- customer 360 panel -->
+  <line x1="500" y1="196" x2="500" y2="680" stroke="#efe9e2" stroke-opacity="0.1"/>
+  <rect x="548" y="196" width="180" height="12" rx="2" fill="#efe9e2" opacity="0.5"/>
+  <rect x="548" y="240" width="90" height="7" rx="2" fill="#efe9e2" opacity="0.3"/>
+  <rect x="548" y="262" width="200" height="9" rx="2" fill="#efe9e2" opacity="0.6"/>
+  <rect x="548" y="292" width="120" height="7" rx="2" fill="#efe9e2" opacity="0.3"/>
+  <rect x="548" y="314" width="168" height="9" rx="2" fill="#efe9e2" opacity="0.6"/>
+
+  <!-- call log ladder -->
+  <line x1="548" y1="360" x2="748" y2="360" stroke="#efe9e2" stroke-opacity="0.14"/>
+  <rect x="548" y="378" width="64" height="7" rx="2" fill="#efe9e2" opacity="0.3"/>
+  <g>
+    <rect x="548" y="404" width="12" height="12" fill="#e8a24b"/>
+    <rect x="576" y="406" width="150" height="8" rx="2" fill="#efe9e2" opacity="0.55"/>
+    <rect x="548" y="440" width="12" height="12" fill="none" stroke="#e8a24b"/>
+    <rect x="576" y="442" width="120" height="8" rx="2" fill="#efe9e2" opacity="0.45"/>
+    <rect x="548" y="476" width="12" height="12" fill="none" stroke="#efe9e2" stroke-opacity="0.3"/>
+    <rect x="576" y="478" width="138" height="8" rx="2" fill="#efe9e2" opacity="0.4"/>
+    <rect x="548" y="512" width="12" height="12" fill="none" stroke="#efe9e2" stroke-opacity="0.3"/>
+    <rect x="576" y="514" width="110" height="8" rx="2" fill="#efe9e2" opacity="0.4"/>
+  </g>
+
+  <!-- follow-up scheduler -->
+  <rect x="820" y="196" width="420" height="200" fill="none" stroke="#efe9e2" stroke-opacity="0.12"/>
+  <rect x="848" y="222" width="140" height="10" rx="2" fill="#efe9e2" opacity="0.5"/>
+  <g>
+    <rect x="848" y="258" width="80" height="56" fill="none" stroke="#e8a24b"/>
+    <rect x="872" y="272" width="32" height="18" fill="#e8a24b" opacity="0.9"/>
+    <rect x="848" y="326" width="80" height="48" fill="none" stroke="#efe9e2" stroke-opacity="0.2"/>
+    <rect x="948" y="258" width="80" height="48" fill="none" stroke="#efe9e2" stroke-opacity="0.2"/>
+    <rect x="948" y="318" width="80" height="56" fill="none" stroke="#e8a24b" stroke-opacity="0.7"/>
+    <rect x="1048" y="258" width="80" height="48" fill="none" stroke="#efe9e2" stroke-opacity="0.2"/>
+    <rect x="1048" y="318" width="80" height="48" fill="none" stroke="#efe9e2" stroke-opacity="0.2"/>
+    <rect x="848" y="386" width="80" height="0" fill="none"/>
+    <rect x="948" y="386" width="80" height="0" fill="none"/>
+    <rect x="1048" y="378" width="80" height="0" fill="none"/>
+  </g>
+  <rect x="848" y="470" width="180" height="34" fill="#e8a24b"/>
+  <rect x="864" y="482" width="148" height="9" rx="2" fill="#17140f"/>
+
+  <!-- keyboard hints -->
+  <g>
+    <rect x="40" y="640" width="66" height="34" fill="none" stroke="#efe9e2" stroke-opacity="0.25"/>
+    <rect x="54" y="653" width="38" height="8" rx="2" fill="#efe9e2" opacity="0.4"/>
+    <rect x="116" y="640" width="66" height="34" fill="none" stroke="#efe9e2" stroke-opacity="0.25"/>
+    <rect x="130" y="653" width="38" height="8" rx="2" fill="#efe9e2" opacity="0.4"/>
+    <rect x="182" y="640" width="66" height="34" fill="none" stroke="#efe9e2" stroke-opacity="0.25"/>
+    <rect x="196" y="653" width="38" height="8" rx="2" fill="#efe9e2" opacity="0.4"/>
+  </g>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <!-- VK monogram: warm-dark tile, Geist Mono initial, amber full stop -->
+  <rect width="48" height="48" fill="#1c1a18"/>
+  <text x="19" y="35" text-anchor="middle" font-family="'Geist Mono', Menlo, monospace" font-size="28" fill="#f3efe9">V</text>
+  <rect x="30" y="30" width="6" height="6" fill="#e8a24b"/>
+</svg>
