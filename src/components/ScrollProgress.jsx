@@ -1,5 +1,7 @@
 import { motion, useScroll, useSpring } from 'framer-motion'
 
+const MotionDiv = motion.div
+
 /** Hairline reading-progress bar pinned to the very top of the page. */
 export function ScrollProgress() {
   const { scrollYProgress } = useScroll()
@@ -10,7 +12,7 @@ export function ScrollProgress() {
   })
 
   return (
-    <motion.div
+    <MotionDiv
       aria-hidden
       style={{ scaleX }}
       className="fixed left-0 right-0 top-0 z-[90] h-px origin-left bg-accent"

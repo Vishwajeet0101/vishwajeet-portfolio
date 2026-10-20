@@ -1,14 +1,16 @@
 # Vishwajeet Kumar Nishad — Portfolio
 
-Personal portfolio of **Vishwajeet Kumar Nishad**, full-stack developer. Warm-minimal editorial design: charcoal canvas, a single amber accent, Geist typography, hairline structure, and case-study–driven project presentation.
+Personal portfolio of **Vishwajeet Kumar Nishad**, full-stack developer. Warm-minimal editorial design: a paper-white canvas carrying a gold-and-amber particle wave, one accent, Inter Tight typography, hairline structure, and case-study–driven project presentation.
 
 ## Stack
 
 - **React 19** + **Vite 8**
 - **Tailwind CSS 4** (CSS-first tokens in `src/index.css`)
 - **Framer Motion** for reveal animations
-- **Geist / Geist Mono** typefaces
-- Dark/light theme with `localStorage` persistence (`src/hooks/useTheme.js`)
+- **Three.js** + **react-three-fiber** for the hero particle wave field
+  (`src/components/ThreeDBackground.jsx`)
+- **Inter Tight / Inter / JetBrains Mono** typefaces
+- Light-first dark/light theme with `localStorage` persistence (`src/hooks/useTheme.js`)
 
 ## Sections
 
@@ -28,7 +30,7 @@ npm run preview   # preview the production build
 ```
 src/
   sections/    Hero, About, Experience, Projects, Skills, Contact
-  components/  Nav, Footer, shared UI
+  components/  Nav, Footer, ThreeDBackground (hero wave field), shared UI
   hooks/       useTheme
   utils/       constants.js  ← edit SITE / PROJECTS / ABOUT data here
 public/        favicon + project artwork (SVG)

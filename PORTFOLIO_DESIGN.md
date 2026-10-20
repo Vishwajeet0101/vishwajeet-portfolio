@@ -22,7 +22,7 @@
 
 Single source of truth: `src/index.css` `@theme` + `html.light` / `html.dark` CSS variables. All components consume variables (`var(--text-primary)`, `var(--line)`…), never hard-coded hexes.
 
-| Token | Dark (default) | Light | Usage |
+| Token | Dark | Light (default) | Usage |
 |---|---|---|---|
 | `--page-bg` | `oklch(0.145 0.006 60)` | `oklch(0.985 0.004 85)` | Page background |
 | `--surface-1` | `oklch(0.185 0.006 60)` | `oklch(0.965 0.005 85)` | Panels, hover wipes |
@@ -33,23 +33,23 @@ Single source of truth: `src/index.css` `@theme` + `html.light` / `html.dark` CS
 | `--line-strong` | 28% white | 30% ink | Buttons, ghost numerals |
 | `--color-accent` | `oklch(0.77 0.14 62)` | `oklch(0.55 0.16 48)` | **Sparingly** — see below |
 
-**Accent budget:** the amber may appear only as — active nav underline · status dot ("open to work") · section index numerals · suffix glyphs on stats (`+`) · focus rings · scroll-progress bar · hover arrows/numerals. Never for headings, never for large fills, never more than one accent moment per viewport.
+**Accent budget:** the amber may appear only as — active nav underline · status dot ("open to work") · section index numerals · suffix glyphs on stats (`+`) · focus rings · scroll-progress bar · hover arrows/numerals · **the hero particle field** (the page's one large amber moment: a texture, not a focal point, gone past the first viewport). Never for headings, never for large fills, never more than one accent moment per viewport.
 
 **Selection & focus:** inverted selection (`::selection` = ink on paper) and a 2px accent outline offset 3px. Grain overlay at 3.5–4.5% opacity ties the monochrome portrait to the page.
 
-### 2.2 Typography — Geist + Geist Mono
+### 2.2 Typography — Inter Tight + Inter + JetBrains Mono
 
-Two families, both self-consistent: **Geist** (display + body) and **Geist Mono** (labels, meta, buttons). Loaded from Google Fonts with `preconnect`; tabular numerals everywhere numbers animate.
+**Inter Tight** for display (Inter's tighter cut, editorial density at large sizes), **Inter** for body copy, and **JetBrains Mono** for labels, meta and buttons. Loaded from Google Fonts with `preconnect`; tabular numerals everywhere numbers animate.
 
 | Style | Spec |
 |---|---|
-| Display XL (hero name) | Geist 600 · `clamp(2.75rem, 10vw, 6.5rem)` · leading 0.92 · tracking −0.035em |
-| Display L (section titles) | Geist 600 · `2rem → 5rem` · leading 1.08 |
-| Display M (card titles) | Geist 600 · `1.75rem → 4xl` |
+| Display XL (hero name) | Inter Tight 600 · `clamp(2.75rem, 10vw, 6.5rem)` · leading 0.92 · tracking −0.035em |
+| Display L (section titles) | Inter Tight 600 · `2rem → 5rem` · leading 1.08 |
+| Display M (card titles) | Inter Tight 600 · `1.75rem → 4xl` |
 | Body L (intro paragraphs) | 15–20px · leading 1.65 · muted color |
 | Body S (descriptions, bullets) | 15px · leading relaxed |
-| Label (`.label`) | Geist Mono 500 · 11px · 0.18em tracking · uppercase — the page's connective tissue |
-| Mono meta (`.mono`) | Geist Mono · 12–13px · tabular-nums |
+| Label (`.label`) | JetBrains Mono 500 · 11px · 0.18em tracking · uppercase — the page's connective tissue |
+| Mono meta (`.mono`) | JetBrains Mono · 12–13px · tabular-nums |
 
 **Rules:** headings are ink-only (no accent on type); sentences case for headings, uppercase mono for labels; line-length ≤ ~65ch for paragraphs; numerals always `tabular-nums`.
 
@@ -78,7 +78,7 @@ Two families, both self-consistent: **Geist** (display + body) and **Geist Mono*
 
 - Language: reveal + wipe. Every animation is opacity/transform only; durations 0.5–0.9s; ease `cubic-bezier(0.22, 1, 0.36, 1)`.
 - Entrance choreography: nav drops in → hero words rise word-by-word through overflow masks (75ms stagger) → meta fades up → sections fade-up once at −60/−80px viewport margins.
-- Continuous: tech marquee, "open to work" ping, scroll-progress hairline.
+- Continuous: tech marquee, "open to work" ping, scroll-progress hairline, hero particle field (60fps while the hero is on screen, hard-stopped past it, one frozen frame under reduced motion).
 - Hover: button fill wipe, row wipe, image scale ≤1.035, arrow nudge ≤2px.
 - **Reduced motion:** `MotionConfig reducedMotion="user"` + a global CSS kill-switch; parallax and marquee disable. Non-negotiable.
 
@@ -146,7 +146,9 @@ Two families, both self-consistent: **Geist** (display + body) and **Geist Mono*
 
 ### 4.3 Explicit non-goals
 
-- No splash/loading screens, no cursor followers, no 3D, no auto-playing media, no more than one accent color, no serif/display font of the week, no pages beyond `/` (a case-study sub-page only if a project genuinely needs it).
+- No splash/loading screens, no cursor followers, no auto-playing media, no more than one accent color, no serif/display font of the week, no pages beyond `/` (a case-study sub-page only if a project genuinely needs it).
+
+**One sanctioned exception — the hero particle field.** `ThreeDBackground.jsx` draws a WebGL point field (Originkit-style scroll wave) behind the hero. It is held to the same rules as the rest of the page: it uses only the accent family, it is a *background* texture rather than a second focal point, it dissolves out past the first viewport so no body copy sits on it, it paints a single frozen frame instead of animating under `prefers-reduced-motion`, and it stops rendering entirely once it is off screen.
 
 ---
 

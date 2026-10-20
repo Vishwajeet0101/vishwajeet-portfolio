@@ -2,21 +2,24 @@ import { motion } from 'framer-motion'
 import { SKILL_GROUPS } from '../utils/constants'
 import { SectionHeading } from '../components/SectionHeading'
 
+const MotionDiv = motion.div
+
 export function Skills() {
   return (
-    <section id="skills" className="scroll-mt-20 px-4 py-24 sm:px-6 sm:py-32">
+    <section id="skills" className="scroll-mt-20 px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          index="04"
+          index="02"
           label="Skills"
-          intro="The tools behind the projects above — not a list of everything I've touched."
+          accent="actually use."
+          intro="The tools behind the projects below — not a list of everything I have ever opened."
         >
-          Tech stack
+          What I
         </SectionHeading>
 
-        <dl className="mt-14">
+        <dl className="mt-10">
           {SKILL_GROUPS.map((group, index) => (
-            <motion.div
+            <MotionDiv
               key={group.title}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -37,7 +40,7 @@ export function Skills() {
                   </span>
                 ))}
               </dd>
-            </motion.div>
+            </MotionDiv>
           ))}
         </dl>
       </div>

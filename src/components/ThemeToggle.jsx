@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Moon, Sun } from 'lucide-react'
 
+const MotionSpan = motion.span
+
 export function ThemeToggle({ theme, toggle }) {
   const isDark = theme === 'dark'
 
@@ -12,7 +14,7 @@ export function ThemeToggle({ theme, toggle }) {
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
       <AnimatePresence mode="wait" initial={false}>
-        <motion.span
+        <MotionSpan
           key={isDark ? 'moon' : 'sun'}
           initial={{ rotate: -60, opacity: 0 }}
           animate={{ rotate: 0, opacity: 1 }}
@@ -25,7 +27,7 @@ export function ThemeToggle({ theme, toggle }) {
           ) : (
             <Sun className="h-3.5 w-3.5" strokeWidth={1.75} />
           )}
-        </motion.span>
+        </MotionSpan>
       </AnimatePresence>
     </button>
   )

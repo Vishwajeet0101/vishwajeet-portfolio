@@ -2,11 +2,45 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { NAV_LINKS, SITE } from '../utils/constants'
 import { scrollToSection } from '../utils/scroll'
-import { ThemeToggle } from './ThemeToggle'
+
+const MotionHeader = motion.header
+const MotionDiv = motion.div
+const MotionLi = motion.li
 
 const num = (i) => String(i + 1).padStart(2, '0')
 
-export function Navbar({ theme, toggleTheme, activeSection }) {
+/* Three lines that fold into an X. Animating the bars themselves (rather
+   than swapping two icons) keeps the control from jumping as it toggles. */
+function MenuIcon({ open }) {
+  const bar = 'absolute left-0 h-px w-full bg-current'
+  const spring = { duration: 0.3, ease: [0.22, 1, 0.36, 1] }
+
+  return (
+    <span aria-hidden className="relative block h-3 w-5">
+      <motion.span
+        className={bar}
+        initial={false}
+        animate={open ? { top: '50%', rotate: 45 } : { top: 0, rotate: 0 }}
+        transition={spring}
+      />
+      <motion.span
+        className={bar}
+        style={{ top: '50%' }}
+        initial={false}
+        animate={open ? { opacity: 0, scaleX: 0.4 } : { opacity: 1, scaleX: 1 }}
+        transition={spring}
+      />
+      <motion.span
+        className={bar}
+        initial={false}
+        animate={open ? { top: '50%', rotate: -45 } : { top: '100%', rotate: 0 }}
+        transition={spring}
+      />
+    </span>
+  )
+}
+
+export function Navbar({ activeSection }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -24,6 +58,15 @@ export function Navbar({ theme, toggleTheme, activeSection }) {
     }
   }, [open])
 
+  // Escape closes the overlay — it covers the whole page, so there has to be
+  // a way out that isn't the pointer.
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e) => e.key === 'Escape' && setOpen(false)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
+
   const go = (id) => {
     scrollToSection(id)
     setOpen(false)
@@ -31,12 +74,12 @@ export function Navbar({ theme, toggleTheme, activeSection }) {
 
   return (
     <>
-      <motion.header
+      <MotionHeader
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed inset-x-0 top-0 z-[80] transition-colors duration-300 ${
-          scrolled
+          scrolled && !open
             ? 'border-b border-[var(--line)] bg-[var(--page-bg)]/85 backdrop-blur-xl'
             : 'border-b border-transparent'
         }`}
@@ -47,92 +90,78 @@ export function Navbar({ theme, toggleTheme, activeSection }) {
             onClick={() => go('hero')}
             className="group flex items-center gap-3 text-left"
           >
-            <span className="flex h-8 w-8 items-center justify-center bg-[var(--text-primary)] font-mono text-[11px] font-medium tracking-tight text-[var(--page-bg)]">
-              VK
+            <span className="font-display text-xl leading-none text-[var(--text-primary)] sm:text-2xl">
+              {SITE.name.split(' ')[0]} <span className="text-accent">.</span>
             </span>
-            <span className="label hidden text-[var(--text-primary)] sm:inline">
-              {SITE.name}
-            </span>
+            <span className="sr-only">{SITE.name} — home</span>
           </button>
 
-          <ul className="hidden items-center gap-7 lg:flex">
-            {NAV_LINKS.map(({ id, label }, i) => {
-              const on = activeSection === id
-              return (
-                <li key={id} className="relative">
-                  <button
-                    type="button"
-                    onClick={() => go(id)}
-                    className={`label flex items-baseline gap-1.5 py-1 transition-colors ${
-                      on
-                        ? 'text-[var(--text-primary)]'
-                        : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
-                    }`}
-                  >
-                    <span className={on ? 'text-accent' : 'opacity-50'}>{num(i)}</span>
-                    {label}
-                  </button>
-                  {on && (
-                    <motion.span
-                      layoutId="nav-underline"
-                      className="absolute -bottom-0.5 left-0 h-px w-full bg-accent"
-                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                    />
-                  )}
-                </li>
-              )
-            })}
-          </ul>
-
-          <div className="flex items-center gap-2">
-            <ThemeToggle theme={theme} toggle={toggleTheme} />
-            <button
-              type="button"
-              className="label flex h-9 items-center border border-[var(--line-strong)] px-3 text-[var(--text-primary)] transition hover:bg-[var(--surface-1)] lg:hidden"
-              aria-expanded={open}
-              aria-label={open ? 'Close menu' : 'Open menu'}
-              onClick={() => setOpen((o) => !o)}
-            >
-              {open ? 'Close' : 'Menu'}
-            </button>
-          </div>
+          {/* The only nav control, at every width. */}
+          <button
+            type="button"
+            className="flex h-10 w-10 items-center justify-center border border-[var(--line-strong)] text-[var(--text-primary)] transition hover:bg-[var(--surface-1)]"
+            aria-expanded={open}
+            aria-controls="nav-overlay"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            onClick={() => setOpen((o) => !o)}
+          >
+            <MenuIcon open={open} />
+          </button>
         </nav>
-      </motion.header>
+      </MotionHeader>
 
       <AnimatePresence>
         {open && (
-          <motion.div
-            className="fixed inset-0 z-[70] flex flex-col bg-[var(--page-bg)] px-4 pb-10 pt-24 sm:px-6 lg:hidden"
+          <MotionDiv
+            id="nav-overlay"
+            className="fixed inset-0 z-[70] flex flex-col overflow-y-auto bg-[var(--page-bg)] px-4 pb-10 pt-24 sm:px-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            <ul className="mt-6">
-              {NAV_LINKS.map(({ id, label }, i) => (
-                <motion.li
-                  key={id}
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 + i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="rule"
-                >
-                  <button
-                    type="button"
-                    onClick={() => go(id)}
-                    className="flex w-full items-baseline gap-5 py-5 text-left"
+            <ul className="mx-auto w-full max-w-6xl">
+              {NAV_LINKS.map(({ id, label }, i) => {
+                const on = activeSection === id
+                return (
+                  <MotionLi
+                    key={id}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: 0.05 + i * 0.05,
+                      duration: 0.5,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="rule"
                   >
-                    <span className="label text-accent">{num(i)}</span>
-                    <span className="font-display text-3xl font-semibold text-[var(--text-primary)]">
-                      {label}
-                    </span>
-                  </button>
-                </motion.li>
-              ))}
+                    <button
+                      type="button"
+                      onClick={() => go(id)}
+                      className="group flex w-full items-baseline gap-5 py-4 text-left sm:py-5"
+                    >
+                      <span className={`label ${on ? 'text-accent' : 'text-[var(--text-muted)]'}`}>
+                        {num(i)}
+                      </span>
+                      <span
+                        className={`font-display text-[clamp(1.75rem,7vw,3rem)] leading-tight transition-colors ${
+                          on
+                            ? 'text-[var(--text-primary)]'
+                            : 'text-[var(--text-muted)] group-hover:text-[var(--text-primary)]'
+                        }`}
+                      >
+                        {label}
+                      </span>
+                    </button>
+                  </MotionLi>
+                )
+              })}
             </ul>
 
-            <p className="label mt-auto pt-10 text-[var(--text-muted)]">{SITE.location}</p>
-          </motion.div>
+            <p className="label mx-auto mt-auto w-full max-w-6xl pt-10 text-[var(--text-muted)]">
+              {SITE.location}
+            </p>
+          </MotionDiv>
         )}
       </AnimatePresence>
     </>

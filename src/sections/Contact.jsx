@@ -1,12 +1,52 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Check, Copy, Send } from 'lucide-react'
+import { ArrowUpRight, Check, Copy, Mail, Send } from 'lucide-react'
 import { useState } from 'react'
 import { IconGitHub, IconLinkedIn, IconX } from '../components/BrandIcons'
-import { SectionHeading } from '../components/SectionHeading'
 import { useClock } from '../hooks/useClock'
 import { SITE } from '../utils/constants'
 
-const INITIAL_FORM = { name: '', email: '', message: '' }
+const MotionDiv = motion.div
+const MotionH2 = motion.h2
+const MotionP = motion.p
+
+const INITIAL_FORM = { name: '', email: '', kind: 'Website', budget: '', message: '' }
+
+const PROJECT_KINDS = [
+  'Website',
+  'Web application',
+  'Dashboard / internal tool',
+  'Backend / API',
+  'Something else',
+]
+
+const BUDGETS = ['Not sure yet', 'Under ₹25k', '₹25k – ₹75k', '₹75k – ₹2L', 'Above ₹2L']
+
+/* A direct-channel card: icon, mono label, the value, and a hover arrow.
+   min-w-0 on the root matters: as a grid item it would otherwise default to
+   min-width:auto and let the long email address push the card past its
+   track on a phone, taking the whole page into horizontal scroll. */
+function ChannelCard({ icon, label, value, href }) {
+  const Icon = icon
+  return (
+    <a
+      href={href}
+      target={href.startsWith('mailto:') ? undefined : '_blank'}
+      rel="noreferrer"
+      className="terminal-panel group flex min-w-0 items-center gap-4 px-4 py-4"
+    >
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--line-strong)] text-[var(--text-primary)] transition-colors duration-300 group-hover:border-accent group-hover:text-accent">
+        <Icon className="h-4 w-4" />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="label block text-[var(--text-muted)]">{label}</span>
+        <span className="mono mt-1.5 block truncate text-[13px] text-[var(--text-primary)]">
+          {value}
+        </span>
+      </span>
+      <ArrowUpRight className="h-4 w-4 shrink-0 text-[var(--text-muted)] transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
+    </a>
+  )
+}
 
 export function Contact() {
   const [copied, setCopied] = useState(false)
@@ -15,13 +55,27 @@ export function Contact() {
 
   const setField = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }))
 
-  // No backend needed: the compose window opens pre-filled with the message.
+  /* No backend, and no pretending there is one: submitting opens the
+     visitor's own mail client with everything already filled in. */
   const dispatch = (e) => {
     e.preventDefault()
-    const subject = encodeURIComponent(`Portfolio inquiry from ${form.name || 'a visitor'}`)
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name}\n${form.email}`)
-    window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`
+    const subject = encodeURIComponent(
+      `${form.kind} project enquiry — ${form.name || 'a visitor'}`,
+    )
+    const lines = [
+      form.message,
+      '',
+      `Project type: ${form.kind}`,
+      form.budget ? `Budget: ${form.budget}` : null,
+      '',
+      `— ${form.name}`,
+      form.email,
+    ].filter((line) => line !== null)
+    window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${encodeURIComponent(
+      lines.join('\n'),
+    )}`
   }
+
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(SITE.email)
@@ -33,114 +87,196 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="scroll-mt-20 px-4 py-24 sm:px-6 sm:py-32">
+    <section id="contact" className="scroll-mt-20 px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">
-        <SectionHeading
-          index="05"
-          label="Contact"
-          intro="Hiring for an internship or entry-level role, or have a project in mind? The fastest way to reach me is email — I reply within a day."
+        {/* Header row: section pill + status. */}
+        <MotionDiv
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="rule flex flex-wrap items-center justify-between gap-4 pt-6"
         >
-          Let&apos;s work together
-        </SectionHeading>
+          <span className="status-pill">
+            <span className="text-accent">Section</span> // 06
+          </span>
+          <span className="status-pill">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+            </span>
+            {SITE.availability}
+          </span>
+        </MotionDiv>
 
-        <motion.div
+        <MotionH2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+          className="font-display mt-8 max-w-3xl text-[clamp(1.75rem,4vw,3rem)] leading-[1.02] text-[var(--text-primary)]"
+        >
+          Tell me what you need <span className="em-serif-italic">built.</span>
+        </MotionH2>
+
+        <MotionP
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-6 max-w-2xl text-[15px] leading-relaxed text-[var(--text-muted)] sm:text-base"
+        >
+          A rough idea is enough to start — I will come back with scope, a timeline and a
+          fixed price. Email is the fastest route and I reply within a day.
+        </MotionP>
+
+        {/* ------------------------------------------- direct communications */}
+        <MotionDiv
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-10"
+        >
+          <p className="label text-[var(--text-muted)]">
+            <span className="text-accent">//</span> direct channels
+          </p>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            <ChannelCard
+              icon={Mail}
+              label="Direct email"
+              value={SITE.email}
+              href={`mailto:${SITE.email}`}
+            />
+            {SITE.linkedin && (
+              <ChannelCard
+                icon={IconLinkedIn}
+                label="LinkedIn"
+                value={SITE.linkedin.replace('https://www.', '').replace(/\/$/, '')}
+                href={SITE.linkedin}
+              />
+            )}
+            <ChannelCard
+              icon={IconGitHub}
+              label="GitHub repositories"
+              value={SITE.github.replace('https://', '')}
+              href={SITE.github}
+            />
+            {SITE.x && (
+              <ChannelCard
+                icon={IconX}
+                label="X (Twitter)"
+                value={SITE.x.replace('https://', '')}
+                href={SITE.x}
+              />
+            )}
+            <button
+              type="button"
+              onClick={copyEmail}
+              className="terminal-panel group flex min-w-0 items-center gap-4 px-4 py-4 text-left"
+            >
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--line-strong)] text-[var(--text-primary)] transition-colors duration-300 group-hover:border-accent group-hover:text-accent">
+                {copied ? (
+                  <Check className="h-4 w-4 text-accent" />
+                ) : (
+                  <Copy className="h-4 w-4" />
+                )}
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="label block text-[var(--text-muted)]">
+                  {copied ? 'Copied to clipboard' : 'Copy email'}
+                </span>
+                <span className="mono mt-1.5 block truncate text-[13px] text-[var(--text-primary)]">
+                  {SITE.email}
+                </span>
+              </span>
+            </button>
+          </div>
+        </MotionDiv>
+
+        {/* ------------------------------------------------- enquiry form */}
+        <MotionDiv
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-14"
+          className="mt-10 border border-[var(--line)] bg-[var(--surface-1)]"
         >
-          <div className="rule">
-            <a
-              href={`mailto:${SITE.email}`}
-              className="row group -mx-4 flex flex-wrap items-center justify-between gap-6 px-4 py-10 transition-[padding] duration-500 hover:pl-6 sm:py-14"
-            >
-              <span className="font-display break-all text-[clamp(1.5rem,5.5vw,3.5rem)] font-semibold leading-[1.05] text-[var(--text-primary)]">
-                {SITE.email}
-              </span>
-              <ArrowUpRight className="h-7 w-7 shrink-0 text-[var(--text-muted)] transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent sm:h-10 sm:w-10" />
-            </a>
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--line)] px-5 py-3">
+            <span className="label text-[var(--text-primary)]">[project_enquiry]</span>
+            <span className="label text-[var(--text-muted)]">reply &lt; 24h · {time} IST</span>
           </div>
 
-          <div className="rule grid gap-x-8 gap-y-12 py-12 lg:grid-cols-12">
-            {/* Inline message dispatch — Stitch's contact form, mailto-powered. */}
-            <form onSubmit={dispatch} className="lg:col-span-7">
-              <p className="label text-[var(--text-muted)]">Send a message</p>
-              <div className="mt-6 grid gap-6 sm:grid-cols-2">
-                <label className="field">
-                  <span className="label text-[var(--text-muted)]">Name</span>
-                  <input
-                    type="text"
-                    required
-                    value={form.name}
-                    onChange={setField('name')}
-                    placeholder="Your name"
-                    autoComplete="name"
-                  />
-                </label>
-                <label className="field">
-                  <span className="label text-[var(--text-muted)]">Email</span>
-                  <input
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={setField('email')}
-                    placeholder="you@example.com"
-                    autoComplete="email"
-                  />
-                </label>
-              </div>
-              <label className="field mt-6">
-                <span className="label text-[var(--text-muted)]">Message</span>
-                <textarea
+          <form onSubmit={dispatch} className="px-5 py-8">
+            <div className="grid gap-6 sm:grid-cols-2">
+              <label className="field">
+                <span className="label text-[var(--text-muted)]">Name</span>
+                <input
+                  type="text"
                   required
-                  rows={4}
-                  value={form.message}
-                  onChange={setField('message')}
-                  placeholder="What are you working on?"
+                  value={form.name}
+                  onChange={setField('name')}
+                  placeholder="Your name"
+                  autoComplete="name"
                 />
               </label>
-              <button type="submit" className="btn btn-solid mt-8">
-                Dispatch message
+              <label className="field">
+                <span className="label text-[var(--text-muted)]">Email</span>
+                <input
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={setField('email')}
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                />
+              </label>
+              <label className="field">
+                <span className="label text-[var(--text-muted)]">Project type</span>
+                <select value={form.kind} onChange={setField('kind')}>
+                  {PROJECT_KINDS.map((kind) => (
+                    <option key={kind} value={kind}>
+                      {kind}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="field">
+                <span className="label text-[var(--text-muted)]">Budget (optional)</span>
+                <select value={form.budget} onChange={setField('budget')}>
+                  <option value="">Prefer not to say</option>
+                  {BUDGETS.map((band) => (
+                    <option key={band} value={band}>
+                      {band}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <label className="field mt-6">
+              <span className="label text-[var(--text-muted)]">What are you building?</span>
+              <textarea
+                required
+                rows={4}
+                value={form.message}
+                onChange={setField('message')}
+                placeholder="A few lines on the project, who it is for, and any deadline."
+              />
+            </label>
+
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <button type="submit" className="btn-pill btn-pill-accent">
+                Send enquiry
                 <Send className="h-3.5 w-3.5" />
               </button>
-            </form>
-
-            {/* Direct channels column. */}
-            <div className="lg:col-span-5 lg:col-start-8">
-              <p className="label text-[var(--text-muted)]">Direct</p>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <button type="button" onClick={copyEmail} className="btn">
-                  {copied ? (
-                    <Check className="h-3.5 w-3.5 text-accent" />
-                  ) : (
-                    <Copy className="h-3.5 w-3.5" />
-                  )}
-                  {copied ? 'Copied' : 'Copy email'}
-                </button>
-                <a href={SITE.github} target="_blank" rel="noreferrer" className="btn">
-                  <IconGitHub className="h-3.5 w-3.5" />
-                  GitHub
-                </a>
-                {SITE.linkedin && (
-                  <a href={SITE.linkedin} target="_blank" rel="noreferrer" className="btn">
-                    <IconLinkedIn className="h-3.5 w-3.5" />
-                    LinkedIn
-                  </a>
-                )}
-                {SITE.x && (
-                  <a href={SITE.x} target="_blank" rel="noreferrer" className="btn">
-                    <IconX className="h-3.5 w-3.5" />
-                    X
-                  </a>
-                )}
-              </div>
-              <p className="mono mt-8 text-[13px] leading-relaxed text-[var(--text-muted)]">
-                {SITE.location} · {time} IST
+              {/* Said plainly, because the button does not post anywhere. */}
+              <p className="mono text-[12px] leading-5 text-[var(--text-muted)]">
+                Opens your mail app with this message ready to send.
               </p>
             </div>
-          </div>
-        </motion.div>
+          </form>
+        </MotionDiv>
       </div>
     </section>
   )
