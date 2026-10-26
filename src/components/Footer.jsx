@@ -1,18 +1,21 @@
 import { ArrowUp, Mail } from 'lucide-react'
 import { useClock } from '../hooks/useClock'
-import { NAV_LINKS, SITE } from '../utils/constants'
-import { scrollToSection } from '../utils/scroll'
+import { useContent } from '../content/useContent'
+import { onLinkClick } from '../lib/router'
+import { NAV_LINKS } from '../utils/constants'
+import { goToSection } from '../utils/scroll'
 import { IconGitHub, IconLinkedIn, IconX } from './BrandIcons'
 
-/** Only renders a social row for links that exist in SITE. */
-const SOCIALS = [
-  { href: SITE.github, label: 'GitHub', icon: IconGitHub },
-  { href: SITE.linkedin, label: 'LinkedIn', icon: IconLinkedIn },
-  { href: SITE.x, label: 'X', icon: IconX },
-].filter((s) => Boolean(s.href))
-
 export function Footer() {
+  const { site: SITE } = useContent()
   const time = useClock()
+
+  /** Only renders a social row for links that exist in SITE. */
+  const SOCIALS = [
+    { href: SITE.github, label: 'GitHub', icon: IconGitHub },
+    { href: SITE.linkedin, label: 'LinkedIn', icon: IconLinkedIn },
+    { href: SITE.x, label: 'X', icon: IconX },
+  ].filter((s) => Boolean(s.href))
 
   return (
     <footer className="border-t border-[var(--line)] px-4 pb-10 pt-16 sm:px-6">
@@ -37,13 +40,18 @@ export function Footer() {
                 <li key={id}>
                   <button
                     type="button"
-                    onClick={() => scrollToSection(id)}
+                    onClick={() => goToSection(id)}
                     className="link text-sm"
                   >
                     {label}
                   </button>
                 </li>
               ))}
+              <li>
+                <a href="/blog" onClick={onLinkClick} className="link text-sm">
+                  Blog
+                </a>
+              </li>
             </ul>
           </nav>
 
@@ -81,7 +89,7 @@ export function Footer() {
 
           <button
             type="button"
-            onClick={() => scrollToSection('hero')}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="label group flex items-center gap-2 text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]"
           >
             Back to top

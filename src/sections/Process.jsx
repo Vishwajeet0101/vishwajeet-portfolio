@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { SectionHeading } from '../components/SectionHeading'
-import { PROCESS } from '../utils/constants'
+import { useContent } from '../content/useContent'
 
 const MotionLi = motion.li
 const MotionSpan = motion.span
@@ -11,6 +11,7 @@ const MotionSpan = motion.span
  * rail) so the two sections don't read as the same component twice.
  */
 export function Process() {
+  const { process: PROCESS } = useContent()
   return (
     <section id="process" className="scroll-mt-20 px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">

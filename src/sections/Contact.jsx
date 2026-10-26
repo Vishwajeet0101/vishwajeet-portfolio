@@ -3,7 +3,7 @@ import { ArrowUpRight, Check, Copy, Mail, Send } from 'lucide-react'
 import { useState } from 'react'
 import { IconGitHub, IconLinkedIn, IconX } from '../components/BrandIcons'
 import { useClock } from '../hooks/useClock'
-import { SITE } from '../utils/constants'
+import { useContent } from '../content/useContent'
 
 const MotionDiv = motion.div
 const MotionH2 = motion.h2
@@ -49,6 +49,7 @@ function ChannelCard({ icon, label, value, href }) {
 }
 
 export function Contact() {
+  const { site: SITE } = useContent()
   const [copied, setCopied] = useState(false)
   const [form, setForm] = useState(INITIAL_FORM)
   const time = useClock()
@@ -157,12 +158,14 @@ export function Contact() {
                 href={SITE.linkedin}
               />
             )}
-            <ChannelCard
-              icon={IconGitHub}
-              label="GitHub repositories"
-              value={SITE.github.replace('https://', '')}
-              href={SITE.github}
-            />
+            {SITE.github && (
+              <ChannelCard
+                icon={IconGitHub}
+                label="GitHub repositories"
+                value={SITE.github.replace('https://', '')}
+                href={SITE.github}
+              />
+            )}
             {SITE.x && (
               <ChannelCard
                 icon={IconX}

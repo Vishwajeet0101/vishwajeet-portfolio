@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { ABOUT, LEARNING } from '../utils/constants'
+import { useContent } from '../content/useContent'
 import { useCountUp } from '../hooks/useCountUp'
 import { SectionHeading } from '../components/SectionHeading'
 
@@ -20,6 +20,7 @@ function Stat({ label, value, suffix, start }) {
 }
 
 export function About() {
+  const { about: ABOUT, learning: LEARNING } = useContent()
   const block = useRef(null)
   const inView = useInView(block, { once: true, margin: '-80px' })
 
@@ -61,10 +62,10 @@ export function About() {
               <div>
                 <p className="label text-[var(--text-muted)]">At a glance</p>
                 <dl className="mt-5">
-                  {ABOUT.facts.map(([k, v]) => (
-                    <div key={k} className="rule flex flex-col gap-1 py-3.5 sm:flex-row sm:gap-6">
-                      <dt className="label w-28 shrink-0 pt-1 text-[var(--text-muted)]">{k}</dt>
-                      <dd className="text-sm leading-relaxed text-[var(--text-primary)]">{v}</dd>
+                  {ABOUT.facts.map((fact) => (
+                    <div key={fact.label} className="rule flex flex-col gap-1 py-3.5 sm:flex-row sm:gap-6">
+                      <dt className="label w-28 shrink-0 pt-1 text-[var(--text-muted)]">{fact.label}</dt>
+                      <dd className="text-sm leading-relaxed text-[var(--text-primary)]">{fact.value}</dd>
                     </div>
                   ))}
                 </dl>

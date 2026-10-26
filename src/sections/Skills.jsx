@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion'
-import { SKILL_GROUPS } from '../utils/constants'
+import { useContent } from '../content/useContent'
 import { SectionHeading } from '../components/SectionHeading'
 
 const MotionDiv = motion.div
 
 export function Skills() {
+  const { skills: SKILL_GROUPS } = useContent()
   return (
     <section id="skills" className="scroll-mt-20 px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">

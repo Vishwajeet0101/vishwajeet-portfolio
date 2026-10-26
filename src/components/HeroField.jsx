@@ -11,10 +11,10 @@ const PortraitField = lazy(() =>
 )
 
 /** Shown until the WebGL chunk arrives — and it is what prints, too. */
-function StaticPortrait() {
+function StaticPortrait({ src }) {
   return (
     <img
-      src={portraitUrl}
+      src={src}
       alt=""
       aria-hidden
       className="absolute inset-0 h-full w-full object-cover object-[50%_12%]"
@@ -25,10 +25,12 @@ function StaticPortrait() {
   )
 }
 
-export function HeroField() {
+/** `src` is an uploaded portrait URL; empty falls back to the bundled photo. */
+export function HeroField({ src }) {
+  const url = src || portraitUrl
   return (
-    <Suspense fallback={<StaticPortrait />}>
-      <PortraitField />
+    <Suspense fallback={<StaticPortrait src={url} />}>
+      <PortraitField src={url} />
     </Suspense>
   )
 }

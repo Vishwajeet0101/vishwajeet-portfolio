@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { EXPERIENCE } from '../utils/constants'
+import { useContent } from '../content/useContent'
 import { SectionHeading } from '../components/SectionHeading'
 
 const MotionLi = motion.li
@@ -16,6 +16,7 @@ const MotionLi = motion.li
  * centred on it at y=13, rail from y=27 down into the next entry's dot.
  */
 export function Experience() {
+  const { experience: EXPERIENCE } = useContent()
   return (
     <section id="experience" className="scroll-mt-20 px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">
@@ -70,7 +71,11 @@ export function Experience() {
 
                 {/* Company monogram — the logo slot, in the page's own type. */}
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--line-strong)] bg-[var(--surface-1)] font-display text-base text-[var(--text-muted)] transition-colors duration-300 group-hover:border-accent group-hover:text-accent">
-                  {job.mark}
+                  {job.logo ? (
+                    <img src={job.logo} alt="" className="h-full w-full object-contain p-1.5" loading="lazy" />
+                  ) : (
+                    job.mark
+                  )}
                 </span>
 
                 <div className="min-w-0 flex-1">

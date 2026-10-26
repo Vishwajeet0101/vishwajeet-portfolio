@@ -1,13 +1,11 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { PROJECTS, SITE } from "../utils/constants";
+import { useContent } from "../content/useContent";
+import { PROJECT_IMAGES } from "../utils/constants";
 import { SectionHeading } from "../components/SectionHeading";
 
 const MotionArticle = motion.article;
 const MotionLi = motion.li;
-
-const FEATURED = PROJECTS.filter((p) => p.featured);
-const OTHERS = PROJECTS.filter((p) => !p.featured);
 
 const num = (i) => String(i + 1).padStart(2, "0");
 
@@ -20,6 +18,10 @@ function ctaFor(project) {
 }
 
 export function Projects() {
+  const { projects, site: SITE } = useContent();
+  const FEATURED = projects.filter((p) => p.featured);
+  const OTHERS = projects.filter((p) => !p.featured);
+
   return (
     <section id="projects" className="scroll-mt-20 px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">
@@ -76,15 +78,17 @@ export function Projects() {
                     <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-[var(--text-muted)]" />
                   </div>
                   <div className="frame-body">
-                    <img
-                      src={project.image}
-                      alt=""
-                      width={1280}
-                      height={720}
-                      className="frame-img"
-                      loading="lazy"
-                      decoding="async"
-                    />
+                    {(project.image || PROJECT_IMAGES[project.id]) && (
+                      <img
+                        src={project.image || PROJECT_IMAGES[project.id]}
+                        alt=""
+                        width={1280}
+                        height={720}
+                        className="frame-img"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    )}
                   </div>
                   <span className="label block border-t border-[var(--line)] px-4 py-3 text-[var(--text-muted)]">
                     {project.tagline || "Featured project"}
@@ -134,7 +138,7 @@ export function Projects() {
                   </p>
 
                   <div className="mt-7 flex flex-wrap items-baseline gap-x-8 gap-y-4">
-                    {project.metric && (
+                    {project.metric?.value && (
                       <p className="flex items-baseline gap-3">
                         <span className="font-display text-2xl tabular-nums text-[var(--text-primary)]">
                           {project.metric.value}
@@ -176,6 +180,7 @@ export function Projects() {
         </div>
 
         {/* ---------------------------------------------------- index of rest */}
+        {OTHERS.length > 0 && (
         <div className="mt-10">
           <p className="label text-[var(--text-muted)]">Also built</p>
 
@@ -229,6 +234,7 @@ export function Projects() {
             })}
           </ul>
         </div>
+        )}
       </div>
     </section>
   );

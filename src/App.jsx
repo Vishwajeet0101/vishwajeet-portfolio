@@ -1,8 +1,10 @@
 import { MotionConfig } from 'framer-motion'
+import { lazy, Suspense } from 'react'
 import { Footer } from './components/Footer'
 import { Navbar } from './components/Navbar'
 import { ScrollProgress } from './components/ScrollProgress'
 import { useActiveSection } from './hooks/useActiveSection'
+import { usePath } from './lib/router'
 import { About } from './sections/About'
 import { Contact } from './sections/Contact'
 import { Experience } from './sections/Experience'
@@ -12,13 +14,17 @@ import { Projects } from './sections/Projects'
 // import { Services } from './sections/Services'
 import { Skills } from './sections/Skills'
 
-export default function App() {
+// Visitors on the home page never download the blog's markdown renderer or
+// the admin editor.
+const BlogIndex = lazy(() => import('./pages/Blog').then((m) => ({ default: m.BlogIndex })))
+const BlogPost = lazy(() => import('./pages/Blog').then((m) => ({ default: m.BlogPost })))
+const Admin = lazy(() => import('./admin/Admin').then((m) => ({ default: m.Admin })))
+
+function Home() {
   const activeSection = useActiveSection()
 
   return (
-    // CSS media queries can't reach Framer's JS-driven animations, so the
-    // reduced-motion preference has to be honoured here too.
-    <MotionConfig reducedMotion="user">
+    <>
       <ScrollProgress />
       <Navbar activeSection={activeSection} />
       <main className="font-body min-h-svh">
@@ -36,6 +42,52 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-    </MotionConfig>
+    </>
+  )
+}
+
+function Page({ children }) {
+  return (
+    <>
+      <Navbar activeSection={null} />
+      <main className="font-body min-h-svh">
+        <Suspense fallback={<div className="min-h-svh" />}>{children}</Suspense>
+      </main>
+      <Footer />
+    </>
+  )
+}
+
+export default function App() {
+  const path = usePath().replace(/\/+$/, '') || '/'
+
+  let page
+  if (path === '/admin' || path.startsWith('/admin/')) {
+    page = (
+      <Suspense fallback={<div className="min-h-svh" />}>
+        <Admin />
+      </Suspense>
+    )
+  } else if (path === '/blog') {
+    page = (
+      <Page>
+        <BlogIndex />
+      </Page>
+    )
+  } else if (path.startsWith('/blog/')) {
+    const slug = decodeURIComponent(path.slice('/blog/'.length))
+    page = (
+      <Page>
+        <BlogPost key={slug} slug={slug} />
+      </Page>
+    )
+  } else {
+    page = <Home />
+  }
+
+  return (
+    // CSS media queries can't reach Framer's JS-driven animations, so the
+    // reduced-motion preference has to be honoured here too.
+    <MotionConfig reducedMotion="user">{page}</MotionConfig>
   )
 }

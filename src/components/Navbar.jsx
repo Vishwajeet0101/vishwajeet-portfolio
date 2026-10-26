@@ -1,7 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { NAV_LINKS, SITE } from '../utils/constants'
-import { scrollToSection } from '../utils/scroll'
+import { useContent } from '../content/useContent'
+import { onLinkClick } from '../lib/router'
+import { NAV_LINKS } from '../utils/constants'
+import { goToSection } from '../utils/scroll'
 
 const MotionHeader = motion.header
 const MotionDiv = motion.div
@@ -41,6 +43,7 @@ function MenuIcon({ open }) {
 }
 
 export function Navbar({ activeSection }) {
+  const { site: SITE } = useContent()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -68,7 +71,7 @@ export function Navbar({ activeSection }) {
   }, [open])
 
   const go = (id) => {
-    scrollToSection(id)
+    goToSection(id)
     setOpen(false)
   }
 
@@ -156,6 +159,32 @@ export function Navbar({ activeSection }) {
                   </MotionLi>
                 )
               })}
+              {/* The blog is its own page, so this one navigates instead of
+                  scrolling. */}
+              <MotionLi
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.05 + NAV_LINKS.length * 0.05,
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="rule"
+              >
+                <a
+                  href="/blog"
+                  onClick={(e) => {
+                    setOpen(false)
+                    onLinkClick(e)
+                  }}
+                  className="group flex w-full items-baseline gap-5 py-4 text-left sm:py-5"
+                >
+                  <span className="label text-[var(--text-muted)]">{num(NAV_LINKS.length)}</span>
+                  <span className="font-display text-[clamp(1.75rem,7vw,3rem)] leading-tight text-[var(--text-muted)] transition-colors group-hover:text-[var(--text-primary)]">
+                    Blog
+                  </span>
+                </a>
+              </MotionLi>
             </ul>
 
             <p className="label mx-auto mt-auto w-full max-w-6xl pt-10 text-[var(--text-muted)]">

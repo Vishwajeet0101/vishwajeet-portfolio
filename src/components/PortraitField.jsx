@@ -155,7 +155,7 @@ function sampleImage(img, grid) {
   return { data: ctx.getImageData(0, 0, W, H).data, W, H }
 }
 
-export function PortraitField({ className = '' }) {
+export function PortraitField({ className = '', src = portraitUrl }) {
   const holderRef = useRef(null)
   const photoWrapRef = useRef(null)
   const [ready, setReady] = useState(false)
@@ -170,7 +170,10 @@ export function PortraitField({ className = '' }) {
     let cleanup = () => {}
 
     const img = new Image()
-    img.src = portraitUrl
+    // An uploaded portrait comes from Supabase Storage; without CORS mode the
+    // canvas is tainted and getImageData throws.
+    img.crossOrigin = 'anonymous'
+    img.src = src
     img.decoding = 'async'
 
     img.onload = () => {
@@ -414,7 +417,7 @@ export function PortraitField({ className = '' }) {
       disposed = true
       cleanup()
     }
-  }, [reduceMotion])
+  }, [reduceMotion, src])
 
   return (
     <div className={`relative h-full w-full ${className}`}>
@@ -424,7 +427,7 @@ export function PortraitField({ className = '' }) {
           one-off reveal, so the two never overwrite each other. */}
       <div ref={photoWrapRef} className="absolute inset-0">
         <img
-          src={portraitUrl}
+          src={src}
           alt=""
           aria-hidden
           className="h-full w-full object-cover object-[50%_12%] transition-opacity duration-1000"

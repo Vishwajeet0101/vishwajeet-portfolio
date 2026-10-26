@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { ArrowDownRight, Send } from 'lucide-react'
 import { HeroField } from '../components/HeroField'
-import { ABOUT, SITE } from '../utils/constants'
+import { useContent } from '../content/useContent'
 import { scrollToSection } from '../utils/scroll'
 
 const container = {
@@ -32,10 +32,10 @@ const MotionSpan = motion.span
 const MotionUl = motion.ul
 const MotionButton = motion.button
 
-/** Hero proof strip: the three numbers a prospective client cares about. */
-const PROOF = ABOUT.stats.slice(0, 3)
-
 export function Hero() {
+  const { site: SITE, about } = useContent()
+  /** Hero proof strip: the three numbers a prospective client cares about. */
+  const PROOF = about.stats.slice(0, 3)
   const [first, ...rest] = SITE.name.split(' ')
   const last = rest.join(' ')
 
@@ -78,7 +78,7 @@ export function Hero() {
             aria-hidden
             className="pointer-events-none absolute left-1/2 top-0 h-[min(60svh,540px)] w-[min(88vw,460px)] -translate-x-1/2"
           >
-            <HeroField />
+            <HeroField src={SITE.portrait} />
             {/* Edge-only mask: feathers the plate into the page without
                 washing out the face, then fades its foot under the name. */}
             <div
@@ -115,8 +115,7 @@ export function Hero() {
           variants={fade}
           className="relative z-10 mx-auto mt-5 max-w-xl text-center text-[0.9375rem] leading-relaxed text-[var(--text-muted)] sm:mt-6 sm:text-base"
         >
-          I build modern websites, web applications and internal tools — including a CRM a
-          logistics sales team uses every day. Available for freelance projects.
+          {SITE.tagline}
         </MotionP>
 
         <MotionDiv

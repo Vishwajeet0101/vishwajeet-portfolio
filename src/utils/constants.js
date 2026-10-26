@@ -2,7 +2,10 @@ import facultyImg from '../assets/project-faculty.png'
 import crmImg from '../assets/project-crm.png'
 
 /**
- * Single source of truth for every fact on the page.
+ * Default content for every fact on the page.
+ *
+ * The live site reads from Supabase (edited at /admin); these values are what
+ * renders before anything has been saved there, or if Supabase is unreachable.
  *
  * Rule for this file: nothing goes in that can't be clicked, verified or
  * truthfully claimed. `linkedin` / `x` render only when non-empty.
@@ -11,12 +14,25 @@ export const SITE = {
   name: 'Vishwajeet Nishad',
   title: 'Web Developer',
   role: 'Technical Operations Engineer @ SpeedoExpress',
+  tagline:
+    'I build modern websites, web applications and internal tools — including a CRM a logistics sales team uses every day. Available for freelance projects.',
   email: 'vishwajeet.inn@gmail.com',
   linkedin: 'https://www.linkedin.com/in/vishwajeet-nishad/',
   x: '',
   github: 'https://github.com/Vishwajeet0101',
   location: 'Greater Noida, India',
   availability: 'Available for freelance projects',
+  // Empty means the bundled photo in src/assets.
+  portrait: '',
+}
+
+/**
+ * Screenshots bundled with the site. A project without its own uploaded
+ * `image` falls back to the entry here by id.
+ */
+export const PROJECT_IMAGES = {
+  'faculty-portal': facultyImg,
+  'speedo-crm': crmImg,
 }
 
 export const ABOUT = {
@@ -27,10 +43,10 @@ export const ABOUT = {
     period: '2024 – Present',
   },
   facts: [
-    ['Based in', 'Greater Noida, India — working with clients anywhere'],
-    ['Builds', 'Marketing sites, web apps, dashboards, internal tools'],
-    ['Currently', 'Technical Operations Engineer at SpeedoExpress'],
-    ['Open to', 'Freelance projects and contract work'],
+    { label: 'Based in', value: 'Greater Noida, India — working with clients anywhere' },
+    { label: 'Builds', value: 'Marketing sites, web apps, dashboards, internal tools' },
+    { label: 'Currently', value: 'Technical Operations Engineer at SpeedoExpress' },
+    { label: 'Open to', value: 'Freelance projects and contract work' },
   ],
   stats: [
     { label: 'Projects shipped', value: 5, suffix: '' },
@@ -172,7 +188,7 @@ export const PROJECTS = [
     tagline: 'ROLE-BASED PLATFORM · SPRING BOOT',
     discipline: 'Web application',
     stack: ['Java 21', 'Spring Boot', 'Spring Security', 'JPA / Hibernate', 'MySQL', 'Docker'],
-    image: facultyImg,
+    image: '',
     github: null,
     live: null,
     demoMailto:
@@ -198,7 +214,7 @@ export const PROJECTS = [
     tagline: 'LIVE PRODUCT · NEXT.JS + SUPABASE',
     discipline: 'Internal tool',
     stack: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL', 'Tailwind CSS', 'Vitest'],
-    image: crmImg,
+    image: '',
     github: null,
     live: 'https://crm-system-speedo-express.vercel.app',
   },
