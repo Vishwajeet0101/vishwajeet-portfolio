@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useContent } from '../content/useContent'
 import { onLinkClick } from '../lib/router'
+import { setScrollLocked } from '../lib/smoothScroll'
 import { NAV_LINKS } from '../utils/constants'
 import { goToSection } from '../utils/scroll'
 
@@ -55,10 +56,8 @@ export function Navbar({ activeSection }) {
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
+    setScrollLocked(open)
+    return () => setScrollLocked(false)
   }, [open])
 
   // Escape closes the overlay — it covers the whole page, so there has to be

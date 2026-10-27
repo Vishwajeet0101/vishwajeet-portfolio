@@ -2,6 +2,7 @@ import { ArrowUp, Mail } from 'lucide-react'
 import { useClock } from '../hooks/useClock'
 import { useContent } from '../content/useContent'
 import { onLinkClick } from '../lib/router'
+import { scrollToY } from '../lib/smoothScroll'
 import { NAV_LINKS } from '../utils/constants'
 import { goToSection } from '../utils/scroll'
 import { IconGitHub, IconLinkedIn, IconX } from './BrandIcons'
@@ -89,7 +90,7 @@ export function Footer() {
 
           <button
             type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => scrollToY(0)}
             className="label group flex items-center gap-2 text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]"
           >
             Back to top

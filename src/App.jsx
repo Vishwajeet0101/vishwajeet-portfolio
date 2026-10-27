@@ -1,10 +1,11 @@
 import { MotionConfig } from 'framer-motion'
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Footer } from './components/Footer'
 import { Navbar } from './components/Navbar'
 import { ScrollProgress } from './components/ScrollProgress'
 import { useActiveSection } from './hooks/useActiveSection'
 import { usePath } from './lib/router'
+import { startSmoothScroll } from './lib/smoothScroll'
 import { About } from './sections/About'
 import { Contact } from './sections/Contact'
 import { Experience } from './sections/Experience'
@@ -60,9 +61,14 @@ function Page({ children }) {
 
 export default function App() {
   const path = usePath().replace(/\/+$/, '') || '/'
+  const isAdmin = path === '/admin' || path.startsWith('/admin/')
+
+  // The admin is a form with its own scrolling textareas; native scrolling
+  // suits it better than eased scrolling.
+  useEffect(() => (isAdmin ? undefined : startSmoothScroll()), [isAdmin])
 
   let page
-  if (path === '/admin' || path.startsWith('/admin/')) {
+  if (isAdmin) {
     page = (
       <Suspense fallback={<div className="min-h-svh" />}>
         <Admin />

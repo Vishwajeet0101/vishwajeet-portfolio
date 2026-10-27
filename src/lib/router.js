@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react'
+import { scrollToY } from './smoothScroll'
 
 /* Three routes (home, blog, admin) don't justify a router dependency: the
    path lives in history, and popstate is the only event that changes it. */
@@ -16,7 +17,7 @@ export function navigate(to) {
   if (to === window.location.pathname) return
   window.history.pushState({}, '', to)
   window.dispatchEvent(new PopStateEvent('popstate'))
-  window.scrollTo(0, 0)
+  scrollToY(0, { immediate: true })
 }
 
 /** Client-side link; modifier-clicks still open a new tab as normal. */

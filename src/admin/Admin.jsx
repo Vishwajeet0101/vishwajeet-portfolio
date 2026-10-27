@@ -11,7 +11,7 @@ const TABS = [...SECTIONS.map((s) => ({ key: s.key, title: s.title })), { key: '
 
 function Shell({ children, wide }) {
   return (
-    <div className="font-body min-h-svh px-4 py-10 sm:px-6">
+    <div className="font-body min-h-svh px-4 py-6 sm:px-6 sm:py-10">
       <div className={`mx-auto ${wide ? 'max-w-6xl' : 'max-w-md'}`}>{children}</div>
     </div>
   )
@@ -172,7 +172,7 @@ function SectionEditor({ section }) {
       </div>
 
       {/* Sticky so Save is reachable at the bottom of a long list. */}
-      <div className="sticky bottom-0 mt-8 flex flex-wrap items-center gap-3 border-t border-[var(--line)] bg-[var(--page-bg)] py-4">
+      <div className="sticky bottom-0 mt-8 flex flex-wrap items-center gap-3 border-t border-[var(--line)] bg-[var(--page-bg)] pt-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
         <button type="button" className="admin-btn admin-btn-primary" disabled={!dirty || busy} onClick={save}>
           {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />}
           Save changes
@@ -224,13 +224,19 @@ function Dashboard({ session }) {
         </div>
       </header>
 
-      <nav className="mt-6 flex flex-wrap gap-2" aria-label="Sections">
+      <nav
+        className="admin-tabs sticky top-0 z-10 -mx-4 mt-6 flex gap-2 overflow-x-auto bg-[var(--page-bg)] px-4 py-2 sm:static sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:py-0"
+        aria-label="Sections"
+      >
         {TABS.map((t) => (
           <button
             key={t.key}
             type="button"
-            onClick={() => setTab(t.key)}
-            className={`admin-btn ${tab === t.key ? 'border-accent text-accent' : ''}`}
+            onClick={(e) => {
+              setTab(t.key)
+              e.currentTarget.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' })
+            }}
+            className={`admin-btn shrink-0 ${tab === t.key ? 'border-accent text-accent' : ''}`}
             aria-current={tab === t.key ? 'page' : undefined}
           >
             {t.title}

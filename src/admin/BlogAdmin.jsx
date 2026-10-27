@@ -168,7 +168,7 @@ function PostEditor({ post, onDone }) {
         </div>
       </div>
 
-      <div className="sticky bottom-0 mt-8 flex flex-wrap items-center gap-3 border-t border-[var(--line)] bg-[var(--page-bg)] py-4">
+      <div className="sticky bottom-0 mt-8 flex flex-wrap items-center gap-3 border-t border-[var(--line)] bg-[var(--page-bg)] pt-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
         {draft.published ? (
           <>
             <button type="button" className="admin-btn admin-btn-primary" disabled={busy} onClick={() => save(true)}>
