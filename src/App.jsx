@@ -1,4 +1,4 @@
-import { MotionConfig } from 'framer-motion'
+import { motion, MotionConfig } from 'framer-motion'
 import { lazy, Suspense, useEffect } from 'react'
 import { Footer } from './components/Footer'
 import { Navbar } from './components/Navbar'
@@ -20,6 +20,8 @@ import { Skills } from './sections/Skills'
 const BlogIndex = lazy(() => import('./pages/Blog').then((m) => ({ default: m.BlogIndex })))
 const BlogPost = lazy(() => import('./pages/Blog').then((m) => ({ default: m.BlogPost })))
 const Admin = lazy(() => import('./admin/Admin').then((m) => ({ default: m.Admin })))
+
+const MotionDiv = motion.div
 
 function Home() {
   const activeSection = useActiveSection()
@@ -94,6 +96,19 @@ export default function App() {
   return (
     // CSS media queries can't reach Framer's JS-driven animations, so the
     // reduced-motion preference has to be honoured here too.
-    <MotionConfig reducedMotion="user">{page}</MotionConfig>
+    <MotionConfig reducedMotion="user">
+      {/* Keyed on the route so each page eases in instead of snapping into
+          place. Opacity only: a transform here would unpin the fixed navbar
+          mid-fade. Enter-only on purpose: an exit animation would hold the old
+          page and break goToSection, which scrolls as soon as home mounts. */}
+      <MotionDiv
+        key={isAdmin ? '/admin' : path}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {page}
+      </MotionDiv>
+    </MotionConfig>
   )
 }

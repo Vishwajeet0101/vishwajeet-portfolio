@@ -172,7 +172,7 @@ export const PROJECTS = [
     id: 'faculty-portal',
     featured: true,
     metric: { value: '126/126', label: 'Automated tests passing' },
-    frame: 'faculty-portal — internal deployment',
+    frame: 'niet-portal.duckdns.org',
     title: 'Faculty Achievement Portal',
     client: 'Noida Institute of Engineering and Technology',
     problem:
@@ -190,9 +190,7 @@ export const PROJECTS = [
     stack: ['Java 21', 'Spring Boot', 'Spring Security', 'JPA / Hibernate', 'MySQL', 'Docker'],
     image: '',
     github: null,
-    live: null,
-    demoMailto:
-      'vishwajeet.inn@gmail.com?subject=Demo%20request%3A%20Faculty%20Achievement%20Portal',
+    live: 'https://niet-portal.duckdns.org/',
   },
   {
     id: 'speedo-crm',
