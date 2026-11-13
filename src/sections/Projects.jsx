@@ -29,7 +29,7 @@ export function Projects() {
           index="03"
           label="Selected work"
           accent="in daily use."
-          intro="Built for real organisations, not for a tutorial. Two case studies with the problem, the build and the numbers — then everything else I have shipped."
+          intro="Built for real organisations, not for a tutorial. Three case studies with the problem, the build and the numbers — then everything else I have shipped."
         >
           Real projects,
         </SectionHeading>
@@ -55,7 +55,41 @@ export function Projects() {
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="rule grid items-start gap-x-10 gap-y-6 py-10 lg:grid-cols-12 lg:py-12"
               >
-                {/* Browser-chrome screenshot. */}
+                {project.device === "laptop" ? (
+                /* Laptop mockup: bezel, screen and base, with the tagline
+                   underneath where the browser frame keeps it inside. */
+                <a
+                  href={project.live || project.github || `mailto:${project.demoMailto || SITE.email}`}
+                  target={project.live || project.github ? "_blank" : undefined}
+                  rel="noreferrer"
+                  className={`laptop group/frame block lg:col-span-5 ${
+                    imageRight ? "lg:order-2" : "lg:order-1"
+                  }`}
+                >
+                  <div className="laptop-lid">
+                    <span className="laptop-cam" aria-hidden />
+                    <div className="laptop-screen">
+                      {(project.image || PROJECT_IMAGES[project.id]) && (
+                        <img
+                          src={project.image || PROJECT_IMAGES[project.id]}
+                          alt=""
+                          width={1280}
+                          height={800}
+                          className="frame-img"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      )}
+                    </div>
+                  </div>
+                  <div className="laptop-base" aria-hidden />
+                  <span className="label mt-5 flex items-center justify-between gap-3 text-[var(--text-muted)]">
+                    <span>{project.tagline || "Featured project"}</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 shrink-0" />
+                  </span>
+                </a>
+                ) : (
+                /* Browser-chrome screenshot. */
                 <a
                   href={
                     project.live ||
@@ -94,6 +128,7 @@ export function Projects() {
                     {project.tagline || "Featured project"}
                   </span>
                 </a>
+                )}
 
                 {/* Story column — takes whichever side the screenshot leaves. */}
                 <div

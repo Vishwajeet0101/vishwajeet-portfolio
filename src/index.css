@@ -249,6 +249,87 @@ body {
   transform: scale(1.02);
 }
 
+/* ---------------------------------------------------------------- laptop
+   The alternative to the browser frame for a project with device: 'laptop'.
+   The lid is inset from the base rather than the base overhanging the
+   column, so nothing pokes past the grid track on a phone. */
+
+.laptop {
+  min-width: 0;
+  padding-top: 0.5rem;
+}
+
+.laptop-lid {
+  position: relative;
+  margin: 0 7%;
+  border: 1px solid var(--line-strong);
+  border-bottom: 0;
+  border-radius: 14px 14px 0 0;
+  background: #0d0d0f;
+  padding: 4.2% 3.2% 3.2%;
+  box-shadow: 0 30px 60px -30px color-mix(in oklch, var(--color-accent) 30%, transparent);
+  transition: box-shadow 0.6s ease;
+}
+
+.laptop-cam {
+  position: absolute;
+  top: 1.6%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: #2a2a2e;
+  transform: translateX(-50%);
+}
+
+.laptop-screen {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--surface-2);
+}
+
+.laptop-screen .frame-img {
+  object-position: top;
+}
+
+.laptop-base {
+  position: relative;
+  height: 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px 2px 14px 14px / 2px 2px 10px 10px;
+  background: linear-gradient(var(--surface-2), var(--surface-1));
+}
+
+/* The thumb notch for opening the lid. */
+.laptop-base::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: 16%;
+  height: 5px;
+  border-radius: 0 0 6px 6px;
+  background: var(--line-strong);
+  transform: translateX(-50%);
+}
+
+.laptop:hover .laptop-lid,
+.laptop:focus-visible .laptop-lid {
+  box-shadow: 0 34px 70px -28px color-mix(in oklch, var(--color-accent) 45%, transparent);
+}
+
+.laptop:hover .frame-img,
+.laptop:focus-visible .frame-img,
+.laptop:active .frame-img {
+  transform: scale(1.02);
+}
+
+.laptop:hover .label svg,
+.laptop:focus-visible .label svg {
+  color: var(--color-accent);
+}
+
 /* ----------------------------------------------------------------- chips */
 
 .chip {

@@ -1,5 +1,6 @@
 import facultyImg from '../assets/project-faculty.png'
 import crmImg from '../assets/project-crm.png'
+import jewelleryImg from '../assets/project-jewellery.png'
 
 /**
  * Default content for every fact on the page.
@@ -33,10 +34,11 @@ export const SITE = {
 export const PROJECT_IMAGES = {
   'faculty-portal': facultyImg,
   'speedo-crm': crmImg,
+  'hament-jewellery': jewelleryImg,
 }
 
 export const ABOUT = {
-  summary: `I build modern websites and web applications — the kind that load fast, read clearly on a phone, and still work six months later. I have shipped a role-based faculty portal for my college on Java and Spring Boot, and a sales CRM on Next.js, TypeScript and Supabase that a logistics team now runs their day from. Day to day I work as a Technical Operations Engineer at SpeedoExpress, which is where I learned what breaks in production and why. I am deepening my full-stack range deliberately, and I take on freelance work for people who need a site or an internal tool built properly.`,
+  summary: `I build modern websites and web applications — the kind that load fast, read clearly on a phone, and still work six months later. I have shipped a role-based faculty portal for my college on Java and Spring Boot, and a sales CRM on Next.js, TypeScript and Supabase that a logistics team now runs their day from — calling queue in the office, selfie attendance and live GPS tracking for the field team. Day to day I work as a Technical Operations Engineer at SpeedoExpress, which is where I learned what breaks in production and why. I am deepening my full-stack range deliberately, and I take on freelance work for people who need a site or an internal tool built properly.`,
   education: {
     degree: 'B.Tech in Computer Science & Engineering',
     school: 'Noida Institute of Engineering and Technology, Greater Noida',
@@ -49,9 +51,9 @@ export const ABOUT = {
     { label: 'Open to', value: 'Freelance projects and contract work' },
   ],
   stats: [
-    { label: 'Projects shipped', value: 5, suffix: '' },
-    { label: 'Live in production', value: 2, suffix: '' },
-    { label: 'Automated tests written', value: 290, suffix: '+' },
+    { label: 'Projects shipped', value: 6, suffix: '' },
+    { label: 'Live in production', value: 3, suffix: '' },
+    { label: 'Automated tests written', value: 1100, suffix: '+' },
     { label: 'Reply time', value: 24, suffix: 'h' },
   ],
 }
@@ -143,7 +145,7 @@ export const EXPERIENCE = [
     mark: 'S',
     skills: ['Next.js', 'Supabase', 'PostgreSQL', 'CRM', 'Operations'],
     highlights: [
-      'Designed and shipped Speedo CRM (Next.js + Supabase), the calling platform the sales team now works from daily.',
+      'Designed and shipped Speedo CRM (Next.js + Supabase), the calling platform the sales team now works from daily, with field tracking and an Android app for staff on the road.',
       'Run platform operations across customers, delivery partners and internal teams — order processing, shipment tracking and issue resolution.',
       'Support onboarding and ongoing management of delivery partners and logistics vendors.',
       'Translate day-to-day operational friction into product changes, which is where most of the CRM feature set came from.',
@@ -195,26 +197,54 @@ export const PROJECTS = [
   {
     id: 'speedo-crm',
     featured: true,
-    metric: { value: '170+', label: 'Unit & database tests' },
+    device: 'laptop',
+    metric: { value: '1,000+', label: 'Unit & database tests' },
     frame: 'crm-system-speedo-express.vercel.app',
-    title: 'Speedo CRM — Sales Calling Platform',
+    title: 'Speedo CRM — Sales Calling & Field Tracking',
     client: 'SpeedoExpress',
     problem:
-      'The sales team worked leads from spreadsheets: no call history, no follow-up schedule, and duplicate numbers getting called twice by different people.',
+      'The sales team worked leads from spreadsheets: no call history, no follow-up schedule, and duplicate numbers getting called twice by different people. Out in the markets, the field team had no attendance record and no way to show where they had been.',
     description:
-      'A production CRM and daily calling queue. It imports leads, builds a per-caller queue, logs every call and schedules the next follow-up automatically. Deployed on Vercel and in daily use.',
+      'A production CRM with a daily calling queue for the office team and a field tracking system for the sales staff on the road. It imports leads, builds a per-caller queue, logs every call and schedules the next follow-up automatically. Field staff check in with a selfie, are tracked only while on duty, and log their visits against leads, while admins watch a live map. Deployed on Vercel, with an Android app for the field team, and in daily use.',
     highlights: [
       'CSV lead import with RFC 4180 parsing, phone normalisation, dedupe and all-or-nothing commits.',
       'Queue generator with priority bands and a D1/D3/D5/D7/D11 follow-up ladder, built as atomic Postgres functions.',
-      'Keyboard-driven caller screen, Customer 360 view, admin dashboard, 30s undo and do-not-call suppression.',
-      'Typed error handling, guarded API routes, 170+ unit and database tests.',
+      'Field tracking: selfie check-in with live camera, server token, duplicate-photo hashes and fake-GPS flag, then admin review.',
+      'Live map on OpenStreetMap with route playback, stop detection, market zones with entry/exit rules, visits and tasks.',
+      'Android app (Capacitor) that tracks in the background only between check-in and check-out; day reports export to Excel and CSV.',
+      'Keyboard-driven caller screen, Customer 360 view, 30s undo, do-not-call suppression and 1,000+ unit and database tests.',
     ],
-    tagline: 'LIVE PRODUCT · NEXT.JS + SUPABASE',
+    tagline: 'LIVE PRODUCT · WEB + ANDROID · NEXT.JS + SUPABASE',
     discipline: 'Internal tool',
-    stack: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL', 'Tailwind CSS', 'Vitest'],
+    stack: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL', 'Tailwind CSS', 'Capacitor', 'Leaflet', 'Vitest'],
     image: '',
     github: null,
     live: 'https://crm-system-speedo-express.vercel.app',
+  },
+  {
+    id: 'hament-jewellery',
+    featured: true,
+    device: 'laptop',
+    metric: { value: '3', label: 'Languages — Hinglish, English, Hindi' },
+    frame: 'hement-jewellary.vercel.app',
+    title: 'Hament Jewellery — Online Storefront',
+    client: 'Hament Jewellery, Madanpur Bazar',
+    problem:
+      'A neighbourhood jeweller with no way to show its pieces online — customers had to walk in or phone to find out what was in stock, in what purity, and at what price.',
+    description:
+      'A storefront for 22K hallmarked gold and 925 sterling silver. Customers browse by category, see purity, weight and price on every piece, and enquire on WhatsApp in one tap; the shop manages its own catalogue from an admin panel.',
+    highlights: [
+      'Category browsing across gold and silver — necklaces, bangles, chains, rings, earrings, pendants, kadas.',
+      'Purity, weight and price on every product, with "Price on WhatsApp" and availability badges where the shop wants them.',
+      'One-tap WhatsApp enquiry from any product, the header and a floating button.',
+      'Language switch between Hinglish, English and Hindi; shop admin login to manage products.',
+    ],
+    tagline: 'LIVE STOREFRONT · NEXT.JS + SUPABASE',
+    discipline: 'E-commerce website',
+    stack: ['Next.js', 'Supabase', 'Tailwind CSS', 'WhatsApp enquiry'],
+    image: '',
+    github: null,
+    live: 'https://hement-jewellary.vercel.app',
   },
   {
     id: 'landslide',
