@@ -1,7 +1,7 @@
 import facultyImg from '../assets/project-faculty.jpg'
-import crmImg from '../assets/project-crm.png'
-import jewelleryImg from '../assets/project-jewellery.png'
-import buddyImg from '../assets/project-buddy.png'
+import crmImg from '../assets/project-crm.jpg'
+import jewelleryImg from '../assets/project-jewellery.jpg'
+import buddyImg from '../assets/project-buddy.jpg'
 
 /**
  * Default content for every fact on the page.
