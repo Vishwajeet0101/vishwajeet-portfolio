@@ -208,7 +208,7 @@ export function Contact() {
         >
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--line)] px-5 py-3">
             <span className="label text-[var(--text-primary)]">[project_enquiry]</span>
-            <span className="label text-[var(--text-muted)]">reply &lt; 24h · {time} IST</span>
+            <span className="label text-[var(--text-muted)]" data-no-scramble>reply &lt; 24h · {time} IST</span>
           </div>
 
           <form onSubmit={dispatch} className="px-5 py-8">

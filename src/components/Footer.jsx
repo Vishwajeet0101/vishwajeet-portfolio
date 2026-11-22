@@ -1,5 +1,4 @@
 import { ArrowUp, Mail } from 'lucide-react'
-import { useClock } from '../hooks/useClock'
 import { useContent } from '../content/useContent'
 import { onLinkClick } from '../lib/router'
 import { scrollToY } from '../lib/smoothScroll'
@@ -9,7 +8,6 @@ import { IconGitHub, IconLinkedIn, IconX } from './BrandIcons'
 
 export function Footer() {
   const { site: SITE } = useContent()
-  const time = useClock()
 
   /** Only renders a social row for links that exist in SITE. */
   const SOCIALS = [
@@ -82,10 +80,6 @@ export function Footer() {
         <div className="rule mt-16 flex flex-col items-start justify-between gap-5 pt-7 sm:flex-row sm:items-center">
           <p className="label text-[var(--text-muted)]">
             © {new Date().getFullYear()} {SITE.name} · {SITE.location}
-          </p>
-
-          <p className="label text-[var(--text-muted)]">
-            React · Tailwind · Framer Motion · {time} IST
           </p>
 
           <button

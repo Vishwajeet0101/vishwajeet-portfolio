@@ -1,6 +1,7 @@
-import facultyImg from '../assets/project-faculty.png'
+import facultyImg from '../assets/project-faculty.jpg'
 import crmImg from '../assets/project-crm.png'
 import jewelleryImg from '../assets/project-jewellery.png'
+import buddyImg from '../assets/project-buddy.png'
 
 /**
  * Default content for every fact on the page.
@@ -35,6 +36,7 @@ export const PROJECT_IMAGES = {
   'faculty-portal': facultyImg,
   'speedo-crm': crmImg,
   'hament-jewellery': jewelleryImg,
+  buddy: buddyImg,
 }
 
 export const ABOUT = {
@@ -51,7 +53,7 @@ export const ABOUT = {
     { label: 'Open to', value: 'Freelance projects and contract work' },
   ],
   stats: [
-    { label: 'Projects shipped', value: 6, suffix: '' },
+    { label: 'Projects shipped', value: 7, suffix: '' },
     { label: 'Live in production', value: 3, suffix: '' },
     { label: 'Automated tests written', value: 1100, suffix: '+' },
     { label: 'Reply time', value: 24, suffix: 'h' },
@@ -245,6 +247,31 @@ export const PROJECTS = [
     image: '',
     github: null,
     live: 'https://hement-jewellary.vercel.app',
+  },
+  {
+    id: 'buddy',
+    featured: true,
+    metric: { value: '< 1s', label: 'Laptop commands, fully offline' },
+    frame: 'Buddy v1.1.0 — Windows 10 / 11',
+    title: 'Buddy — Voice Assistant for Windows',
+    problem:
+      'Windows has no free, always-on voice assistant that understands how people actually talk here — mixing Hindi and English, asking follow-ups, and expecting the laptop to just do the thing.',
+    description:
+      'Say "Hey Buddy" and talk. A Siri-style desktop assistant that opens apps, sets timers and alarms, plays music, controls volume, Wi-Fi and windows, reads what is on your screen and answers anything — in English or Hinglish. It starts with Windows, lives in the tray, and costs nothing to run.',
+    highlights: [
+      'Offline wake word and speech-to-text with Vosk; laptop commands run without internet in under a second.',
+      'AI answers through Groq (≈0.3s) with Gemini as backup, spoken sentence by sentence while the rest is still being written.',
+      'Understands Hinglish and Hindi script ("Chrome kholo", "thoda awaaz badha do"), follow-up questions and "stop / ruko" interrupts.',
+      'Reads the screen to explain code or solve a question; WhatsApp messages and calls that always confirm before sending.',
+      'Voice training so only your voice wakes it; API keys encrypted with Windows DPAPI; pauses during calls and when locked.',
+      'Timers, alarms and reminders that survive a restart, plus routines like "good morning" and "study mode".',
+    ],
+    tagline: 'DESKTOP APP · PYTHON · OFFLINE WAKE WORD + AI',
+    discipline: 'Desktop tool',
+    stack: ['Python', 'Vosk', 'Groq', 'Gemini', 'Edge TTS', 'CustomTkinter'],
+    image: '',
+    github: 'https://github.com/Vishwajeet0101/buddy-voice-assistant',
+    live: null,
   },
   {
     id: 'landslide',

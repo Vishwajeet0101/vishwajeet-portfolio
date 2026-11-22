@@ -29,7 +29,7 @@ export function Projects() {
           index="03"
           label="Selected work"
           accent="in daily use."
-          intro="Built for real organisations, not for a tutorial. Three case studies with the problem, the build and the numbers — then everything else I have shipped."
+          intro="Built for real organisations, not for a tutorial. Four case studies with the problem, the build and the numbers — then everything else I have shipped."
         >
           Real projects,
         </SectionHeading>

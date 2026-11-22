@@ -6,6 +6,7 @@ import { ScrollProgress } from './components/ScrollProgress'
 import { useActiveSection } from './hooks/useActiveSection'
 import { usePath } from './lib/router'
 import { startSmoothScroll } from './lib/smoothScroll'
+import { startTextScramble } from './lib/textScramble'
 import { About } from './sections/About'
 import { Contact } from './sections/Contact'
 import { Experience } from './sections/Experience'
@@ -68,6 +69,9 @@ export default function App() {
   // The admin is a form with its own scrolling textareas; native scrolling
   // suits it better than eased scrolling.
   useEffect(() => (isAdmin ? undefined : startSmoothScroll()), [isAdmin])
+  // Same for the hover scramble: words shuffling under the cursor would get in
+  // the way of editing.
+  useEffect(() => (isAdmin ? undefined : startTextScramble()), [isAdmin])
 
   let page
   if (isAdmin) {
