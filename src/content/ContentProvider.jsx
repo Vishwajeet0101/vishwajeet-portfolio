@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { ContentContext, mergeContent } from './useContent'
 
-const CACHE_KEY = 'portfolio-content-v1'
+const CACHE_KEY = 'portfolio-content-v2'
 
 function readCache() {
   try {
