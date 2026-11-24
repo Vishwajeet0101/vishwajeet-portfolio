@@ -6,6 +6,14 @@ import { SectionHeading } from "../components/SectionHeading";
 
 const MotionArticle = motion.article;
 const MotionLi = motion.li;
+const MotionImg = motion.img;
+
+/** Feeds the pointer position to the laptop screen's glare as CSS vars. */
+function trackGlare(e) {
+  const r = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty("--mx", `${((e.clientX - r.left) / r.width) * 100}%`);
+  e.currentTarget.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
+}
 
 const num = (i) => String(i + 1).padStart(2, "0");
 
@@ -13,6 +21,7 @@ const num = (i) => String(i + 1).padStart(2, "0");
     on a project that has no public URL. */
 function ctaFor(project) {
   if (project.live) return "Visit the live site";
+  if (project.download) return "Download the latest release";
   if (project.github) return "View the source";
   return "Request a walkthrough";
 }
@@ -29,7 +38,7 @@ export function Projects() {
           index="03"
           label="Selected work"
           accent="in daily use."
-          intro="Built for real organisations, not for a tutorial. Four case studies with the problem, the build and the numbers — then everything else I have shipped."
+          intro="Built for real organisations, not for a tutorial. Five case studies with the problem, the build and the numbers — then everything else I have shipped."
         >
           Real projects,
         </SectionHeading>
@@ -62,6 +71,7 @@ export function Projects() {
                   href={project.live || project.github || `mailto:${project.demoMailto || SITE.email}`}
                   target={project.live || project.github ? "_blank" : undefined}
                   rel="noreferrer"
+                  onPointerMove={trackGlare}
                   className={`laptop group/frame block lg:col-span-5 ${
                     imageRight ? "lg:order-2" : "lg:order-1"
                   }`}
@@ -70,7 +80,8 @@ export function Projects() {
                     <span className="laptop-cam" aria-hidden />
                     <div className="laptop-screen">
                       {(project.image || PROJECT_IMAGES[project.id]) && (
-                        <img
+                        /* Powers on as it scrolls into view. */
+                        <MotionImg
                           src={project.image || PROJECT_IMAGES[project.id]}
                           alt=""
                           width={1280}
@@ -78,8 +89,13 @@ export function Projects() {
                           className="frame-img"
                           loading="lazy"
                           decoding="async"
+                          initial={{ opacity: 0.15, filter: "brightness(0.4) saturate(0.6)" }}
+                          whileInView={{ opacity: 1, filter: "brightness(1) saturate(1)" }}
+                          viewport={{ once: true, margin: "-80px" }}
+                          transition={{ duration: 1.1, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
                         />
                       )}
+                      <span className="laptop-sheen" aria-hidden />
                     </div>
                   </div>
                   <div className="laptop-base" aria-hidden />
@@ -172,6 +188,27 @@ export function Projects() {
                     {project.description}
                   </p>
 
+                  {project.steps?.length > 0 && (
+                    <div className="mt-7 border-l border-[var(--line-strong)] pl-5">
+                      <p className="label text-[var(--text-muted)]">
+                        How to use
+                      </p>
+                      <ol className="mt-2.5 max-w-xl space-y-1.5">
+                        {project.steps.map((step, i) => (
+                          <li
+                            key={step}
+                            className="flex gap-3 text-[15px] leading-relaxed text-[var(--text-muted)]"
+                          >
+                            <span className="mono shrink-0 pt-[3px] text-[12px]">
+                              {num(i)}
+                            </span>
+                            <span>{step}</span>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+
                   <div className="mt-7 flex flex-wrap items-baseline gap-x-8 gap-y-4">
                     {project.metric?.value && (
                       <p className="flex items-baseline gap-3">
@@ -196,11 +233,14 @@ export function Projects() {
                   <a
                     href={
                       project.live ||
+                      project.download ||
                       project.github ||
                       `mailto:${project.demoMailto || SITE.email}`
                     }
                     target={
-                      project.live || project.github ? "_blank" : undefined
+                      project.live || project.download || project.github
+                        ? "_blank"
+                        : undefined
                     }
                     rel="noreferrer"
                     className="story-link mt-8"

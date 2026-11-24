@@ -2,6 +2,7 @@ import facultyImg from '../assets/project-faculty.jpg'
 import crmImg from '../assets/project-crm.jpg'
 import jewelleryImg from '../assets/project-jewellery.jpg'
 import buddyImg from '../assets/project-buddy.jpg'
+import solvraImg from '../assets/project-solvra.png'
 
 /**
  * Default content for every fact on the page.
@@ -37,6 +38,7 @@ export const PROJECT_IMAGES = {
   'speedo-crm': crmImg,
   'hament-jewellery': jewelleryImg,
   buddy: buddyImg,
+  solvra: solvraImg,
 }
 
 export const ABOUT = {
@@ -53,7 +55,7 @@ export const ABOUT = {
     { label: 'Open to', value: 'Freelance projects and contract work' },
   ],
   stats: [
-    { label: 'Projects shipped', value: 7, suffix: '' },
+    { label: 'Projects shipped', value: 8, suffix: '' },
     { label: 'Live in production', value: 3, suffix: '' },
     { label: 'Automated tests written', value: 1100, suffix: '+' },
     { label: 'Reply time', value: 24, suffix: 'h' },
@@ -271,6 +273,39 @@ export const PROJECTS = [
     stack: ['Python', 'Vosk', 'Groq', 'Gemini', 'Edge TTS', 'CustomTkinter'],
     image: '',
     github: 'https://github.com/Vishwajeet0101/buddy-voice-assistant',
+    live: null,
+  },
+  {
+    id: 'solvra',
+    featured: true,
+    device: 'laptop',
+    metric: { value: '1 → 60', label: 'Day revision ladder, six rounds' },
+    title: 'Solvra — LeetCode Revision Tracker',
+    problem:
+      'Solving a LeetCode problem once is easy to forget a week later. There was no simple way to know which problems were due for revision, which ones had slipped, or to keep every accepted solution and its notes in one place.',
+    description:
+      'A free Chrome extension (also Brave and Edge) for LeetCode practice. Every solved problem comes back for revision on a spaced schedule, Solvra shows what is due and what you missed, and each Accepted solution is saved with your notes to GitHub and/or a folder on your computer.',
+    highlights: [
+      'Spaced revision after 1, 3, 7, 14, 30 and 60 days, with due-today, missed-by-N-days and full per-problem history.',
+      'Auto save on Accepted: a pop-up asks for notes, then pushes the code and a README to GitHub (one-click login) or a local folder.',
+      'Reads Solved / Attempted / Not solved straight from your LeetCode account; reminders when revisions are due.',
+      'ChatGPT and Gemini side panel (Alt+Shift+A), plus ad blocker, study-hours site blocker, Clean YouTube and a time tracker.',
+      'No server and no tracking: data stays in the browser, solutions go only to your own GitHub repo.',
+    ],
+    steps: [
+      'Download solvra-….zip from the latest GitHub release and unzip it into a folder you will keep.',
+      'Open chrome://extensions (brave://extensions or edge://extensions).',
+      'Turn on Developer mode in the top-right corner.',
+      'Click Load unpacked and pick the unzipped folder (the one with manifest.json).',
+      'Pin Solvra from the puzzle-piece menu.',
+      'On the Welcome page, click Login with GitHub, authorise, and pick your repo.',
+    ],
+    tagline: 'CHROME EXTENSION · JAVASCRIPT · GITHUB SYNC',
+    discipline: 'Browser extension',
+    stack: ['JavaScript', 'Chrome Extension (MV3)', 'GitHub API', 'HTML & CSS'],
+    image: '',
+    github: 'https://github.com/Vishwajeet0101/solvra',
+    download: 'https://github.com/Vishwajeet0101/solvra/releases/latest',
     live: null,
   },
   {
